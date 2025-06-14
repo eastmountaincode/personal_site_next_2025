@@ -1,4 +1,8 @@
-const DITHERED_IMAGE_STYLE = `
+// Prevent duplicate loading of the entire script
+if (typeof window.ASDitheredImageLoaded === 'undefined') {
+    window.ASDitheredImageLoaded = true;
+
+    const DITHERED_IMAGE_STYLE = `
 .ditheredImageStyle {
     width: 100%;
     height: 100%;
@@ -6,9 +10,9 @@ const DITHERED_IMAGE_STYLE = `
     margin: 0;
     image-rendering: crisp-edges;
 }
-`
+`;
 
-const workerPath = document.currentScript.src.replace("as-dithered-image.js", "ditherworker.js")
+    const workerPath = document.currentScript.src.replace("as-dithered-image.js", "ditherworker.js");
 
 class ASDitheredImage extends HTMLElement {
     constructor() {
@@ -242,6 +246,18 @@ class ASDitheredImage extends HTMLElement {
         const calculatedHeight = Math.round(rect.height * screenPixelsToBackingStorePixels)
         let adjustedPixelSize = Math.round(screenPixelsToBackingStorePixels * this.crunchFactor_)
 
+        // Safety check: ensure we have valid dimensions
+        if (calculatedWidth <= 0 || calculatedHeight <= 0 || adjustedPixelSize <= 0) {
+            console.warn("as-dithered-image: Invalid dimensions, skipping render", {
+                calculatedWidth,
+                calculatedHeight,
+                adjustedPixelSize,
+                rectWidth: rect.width,
+                rectHeight: rect.height
+            })
+            return
+        }
+
         if ((this.last_draw_state_.width == calculatedWidth) &&
             (this.last_draw_state_.height == calculatedHeight) &&
             (this.last_draw_state_.adjustedPixelSize == adjustedPixelSize) &&
@@ -266,7 +282,22 @@ class ASDitheredImage extends HTMLElement {
 
         this.context_.imageSmoothingEnabled = true
         this.context_.drawImage(this.original_image_, 0, 0, this.canvas_.width / adjustedPixelSize, this.canvas_.height / adjustedPixelSize)
-        const originalData = this.context_.getImageData(0, 0, this.canvas_.width / adjustedPixelSize, this.canvas_.height / adjustedPixelSize)
+        
+        // Safety check before getImageData
+        const imageDataWidth = Math.floor(this.canvas_.width / adjustedPixelSize)
+        const imageDataHeight = Math.floor(this.canvas_.height / adjustedPixelSize)
+        if (imageDataWidth <= 0 || imageDataHeight <= 0) {
+            console.warn("as-dithered-image: Invalid image data dimensions", {
+                imageDataWidth,
+                imageDataHeight,
+                canvasWidth: this.canvas_.width,
+                canvasHeight: this.canvas_.height,
+                adjustedPixelSize
+            })
+            return
+        }
+        
+        const originalData = this.context_.getImageData(0, 0, imageDataWidth, imageDataHeight)
         this.context_.clearRect(0, 0, this.canvas_.width, this.canvas_.height)
 
         const msg = {}
@@ -281,4 +312,9 @@ class ASDitheredImage extends HTMLElement {
     }
 }
 
-window.customElements.define('as-dithered-image', ASDitheredImage); 
+    // Only define the custom element if it hasn't been defined already
+    if (!window.customElements.get('as-dithered-image')) {
+        window.customElements.define('as-dithered-image', ASDitheredImage);
+    }
+
+} // End of ASDitheredImageLoaded check 

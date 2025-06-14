@@ -12,7 +12,7 @@ export default function BioinformaticsPage() {
       tags: ["Python", "PyTorch", "Protein Folding", "Deep Learning"],
       date: "2026",
       crunch: 1,
-      cutoff: 0.8,
+      cutoff: 0.65,
       isDetails: false
     },
     {
@@ -48,28 +48,7 @@ export default function BioinformaticsPage() {
       cutoff: 0.8,
       isDetails: false
     },
-    {
-      id: 5,
-      title: "Phylogenetic Tree Reconstruction",
-      description: "Maximum likelihood methods for reconstructing evolutionary relationships from molecular sequence data.",
-      image: "/dna-placeholder.svg",
-      tags: ["R", "Phylogenetics", "Evolution", "BEAST"],
-      date: "2022",
-      crunch: 1,
-      cutoff: 0.8,
-      isDetails: false
-    },
-    {
-      id: 6,
-      title: "CRISPR Guide RNA Design Tool",
-      description: "Web application for designing optimal guide RNAs for CRISPR-Cas9 gene editing experiments.",
-      image: "/dna-placeholder.svg",
-      tags: ["React", "Bioinformatics", "CRISPR", "Web App"],
-      date: "2023",
-      crunch: 1,
-      cutoff: 0.8,
-      isDetails: false
-    }
+
   ];
 
   return (
@@ -103,7 +82,7 @@ export default function BioinformaticsPage() {
       </div>
 
       {/* Call to Action */}
-      <div className="mt-12 text-center">
+      {/* <div className="mt-12 text-center">
         <div className="bg-gray-50 rounded-lg p-8">
           <h3 className="text-2xl font-semibold text-gray-900 mb-4">
             Interested in Collaboration?
@@ -116,7 +95,7 @@ export default function BioinformaticsPage() {
             Get in Touch
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 } 

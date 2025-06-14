@@ -31,14 +31,27 @@ export default function RootLayout({
 
   // Load the as-dithered-image web component globally
   useEffect(() => {
+    // Check if the script is already loaded
+    const existingScript = document.querySelector('script[src="/as-dithered-image.js"]');
+    if (existingScript) {
+      return; // Script already exists, don't add another
+    }
+
+    // Check if the custom element is already defined
+    if (window.customElements && window.customElements.get('as-dithered-image')) {
+      return; // Component already registered
+    }
+
     const script = document.createElement('script');
     script.src = '/as-dithered-image.js';
     script.async = true;
+    script.id = 'as-dithered-image-script'; // Add an ID for easier identification
     document.head.appendChild(script);
 
     return () => {
-      if (document.head.contains(script)) {
-        document.head.removeChild(script);
+      const scriptToRemove = document.getElementById('as-dithered-image-script');
+      if (scriptToRemove && document.head.contains(scriptToRemove)) {
+        document.head.removeChild(scriptToRemove);
       }
     };
   }, []);
