@@ -17,12 +17,9 @@ export default function ProjectCard({
   onViewDetails,
   className = ""
 }: ProjectCardProps) {
-  // Use placeholder image if none provided
-  const imageUrl = image || "https://via.placeholder.com/400x240/e2e8f0/64748b?text=Project+Image";
-
   return (
     <div
-      className={`bg-white rounded-lg shadow-md transition-shadow duration-300 p-6 border border-gray-200 flex flex-col ${className}`}
+      className={`bg-white rounded-lg transition-shadow duration-300 p-6 border border-gray-200 flex flex-col ${className}`}
     >
       {/* Card Header */}
       <div className="flex justify-between items-start mb-4">
@@ -34,18 +31,31 @@ export default function ProjectCard({
         </span>
       </div>
 
-      {/* Image */}
-      <div className="mb-4 aspect-[4/3] bg-gray-200 rounded-md overflow-hidden hidden sm:block">
-        <img
-          src={imageUrl}
-          alt={title}
-          className="w-full h-full object-cover"
-          onError={(e) => {
-            // Fallback to placeholder if image fails to load
-            e.currentTarget.src = "https://via.placeholder.com/400x240/e2e8f0/64748b?text=Image+Not+Found";
-          }}
-        />
-      </div>
+      {/* Image - only show if provided */}
+      {image && (
+        <div className="mb-4 aspect-[2/1] rounded-md overflow-hidden">
+          <div 
+            className="halftone w-full h-full relative"
+            style={{
+              filter: 'grayscale(100%) brightness(0.55) blur(2px) contrast(99)'
+            }}
+          >
+            <img
+              src={image}
+              alt={title}
+              className="w-full h-full object-cover"
+            />
+            <div 
+              className="absolute inset-0"
+              style={{
+                background: 'radial-gradient(2.3px at center, black, white)',
+                backgroundSize: '7.5px 7.5px',
+                mixBlendMode: 'screen'
+              }}
+            />
+          </div>
+        </div>
+      )}
 
       {/* Description */}
       <p className="text-gray-600 mb-4 line-clamp-3">

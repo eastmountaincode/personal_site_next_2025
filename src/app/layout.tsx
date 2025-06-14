@@ -3,6 +3,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import "./globals.css";
 
 const navigation = [
@@ -11,6 +12,8 @@ const navigation = [
   { name: "Projects", href: "/projects" },
   { name: "Blog", href: "/blog" },
   { name: "Bioinformatics", href: "/bioinformatics" },
+  { name: "Halftone Test with Rotation", href: "/halftone-test-with-rotation" },
+  { name: "Halftone Test No Rotation", href: "/halftone-test-no-rotation" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -20,6 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -60,16 +64,23 @@ export default function RootLayout({
               <nav className={`${
                 isMobileMenuOpen ? 'block' : 'hidden'
               } md:block`}>
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className="block py-2 hover:underline"
-                    onClick={() => setIsMobileMenuOpen(false)} // Close menu when link is clicked
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+                {navigation.map((item) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className={`block py-2 ${
+                        isActive 
+                          ? 'font-bold' 
+                          : 'hover:underline'
+                      }`}
+                      onClick={() => setIsMobileMenuOpen(false)} // Close menu when link is clicked
+                    >
+                      {item.name}
+                    </Link>
+                  );
+                })}
               </nav>
             </div>
           </aside>
