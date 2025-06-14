@@ -2,7 +2,7 @@
 
 import type { Metadata } from "next";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import "./globals.css";
 
@@ -14,6 +14,10 @@ const navigation = [
   { name: "Bioinformatics", href: "/bioinformatics" },
   { name: "Halftone Test with Rotation", href: "/halftone-test-with-rotation" },
   { name: "Halftone Test No Rotation", href: "/halftone-test-no-rotation" },
+  { name: "Halftone with Gradient", href: "/halftone-with-gradient" },
+  { name: "Halftone with Image", href: "/halftone-with-image" },
+  { name: "Halftone with Image BW", href: "/halftone-image-bw" },
+  { name: "Dithering Test", href: "/dithering-test" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -24,6 +28,20 @@ export default function RootLayout({
 }>) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+
+  // Load the as-dithered-image web component globally
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = '/as-dithered-image.js';
+    script.async = true;
+    document.head.appendChild(script);
+
+    return () => {
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
+    };
+  }, []);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);

@@ -8,49 +8,67 @@ export default function BioinformaticsPage() {
       id: 1,
       title: "Protein Structure Prediction",
       description: "Machine learning approach to predict protein tertiary structure from amino acid sequences using transformer models.",
-      image: "https://www.biopharma-excellence.com/wp-content/themes/bpe/images/dna-bg.jpg",
+      image: "/images/protein2.webp",
       tags: ["Python", "PyTorch", "Protein Folding", "Deep Learning"],
-      date: "2024"
+      date: "2026",
+      crunch: 1,
+      cutoff: 0.8,
+      isDetails: false
     },
     {
       id: 2,
       title: "Genomic Variant Analysis Pipeline",
       description: "Automated pipeline for processing and analyzing genomic variants from whole genome sequencing data.",
-      image: "https://www.biopharma-excellence.com/wp-content/themes/bpe/images/dna-bg.jpg",
+      image: "/dna-placeholder.svg",
       tags: ["Bioconductor", "R", "NGS", "GATK"],
-      date: "2023"
+      date: "2023",
+      crunch: 1,
+      cutoff: 0.8,
+      isDetails: false
     },
     {
       id: 3,
       title: "Drug-Target Interaction Network",
       description: "Network analysis of drug-target interactions using graph neural networks to predict novel therapeutic targets.",
-      image: "https://www.biopharma-excellence.com/wp-content/themes/bpe/images/dna-bg.jpg",
+      image: "/dna-placeholder.svg",
       tags: ["NetworkX", "Graph ML", "Drug Discovery", "Python"],
-      date: "2023"
+      date: "2023",
+      crunch: 1,
+      cutoff: 0.8,
+      isDetails: false
     },
     {
       id: 4,
       title: "scRNA-seq Cell Type Classification",
       description: "Single-cell RNA sequencing analysis for automated cell type identification in immune system studies.",
-      image: "https://www.biopharma-excellence.com/wp-content/themes/bpe/images/dna-bg.jpg",
+      image: "/dna-placeholder.svg",
       tags: ["Scanpy", "Python", "Single Cell", "Immunology"],
-      date: "2024"
+      date: "2024",
+      crunch: 1,
+      cutoff: 0.8,
+      isDetails: false
     },
     {
       id: 5,
       title: "Phylogenetic Tree Reconstruction",
       description: "Maximum likelihood methods for reconstructing evolutionary relationships from molecular sequence data.",
-      image: "https://www.biopharma-excellence.com/wp-content/themes/bpe/images/dna-bg.jpg",
+      image: "/dna-placeholder.svg",
       tags: ["R", "Phylogenetics", "Evolution", "BEAST"],
-      date: "2022"
+      date: "2022",
+      crunch: 1,
+      cutoff: 0.8,
+      isDetails: false
     },
     {
       id: 6,
       title: "CRISPR Guide RNA Design Tool",
       description: "Web application for designing optimal guide RNAs for CRISPR-Cas9 gene editing experiments.",
-      image: "https://www.biopharma-excellence.com/wp-content/themes/bpe/images/dna-bg.jpg",
+      image: "/dna-placeholder.svg",
       tags: ["React", "Bioinformatics", "CRISPR", "Web App"],
-      date: "2023"
+      date: "2023",
+      crunch: 1,
+      cutoff: 0.8,
+      isDetails: false
     }
   ];
 
@@ -76,6 +94,9 @@ export default function BioinformaticsPage() {
             image={project.image}
             tags={project.tags}
             date={project.date}
+            crunch={project.crunch}
+            cutoff={project.cutoff}
+            isDetails={project.isDetails}
             onViewDetails={() => console.log(`View details for ${project.title}`)}
           />
         ))}

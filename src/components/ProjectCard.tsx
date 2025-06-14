@@ -6,6 +6,9 @@ interface ProjectCardProps {
   date: string;
   onViewDetails?: () => void;
   className?: string;
+  cutoff?: number;
+  crunch?: number;
+  isDetails?: boolean;
 }
 
 export default function ProjectCard({
@@ -15,11 +18,14 @@ export default function ProjectCard({
   tags,
   date,
   onViewDetails,
-  className = ""
+  className = "",
+  cutoff,
+  crunch,
+  isDetails = true
 }: ProjectCardProps) {
   return (
     <div
-      className={`bg-white rounded-lg transition-shadow duration-300 p-6 border border-gray-200 flex flex-col ${className}`}
+      className={`rounded-lg transition-shadow duration-300 p-6 border border-2 border-gray-200 flex flex-col ${className}`}
     >
       {/* Card Header */}
       <div className="flex justify-between items-start mb-4">
@@ -34,26 +40,20 @@ export default function ProjectCard({
       {/* Image - only show if provided */}
       {image && (
         <div className="mb-4 aspect-[2/1] rounded-md overflow-hidden">
-          <div 
-            className="halftone w-full h-full relative"
+          {/* @ts-ignore - Custom web component */}
+          <as-dithered-image 
+            src={image}
+            alt={title}
+            crunch={crunch}
+            cutoff={cutoff}
+            darkrgba="rgba(0, 0, 0, 255)"
+            lightrgba="rgba(240, 240, 240, 0)"
             style={{
-              filter: 'grayscale(100%) brightness(0.55) blur(2px) contrast(99)'
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover'
             }}
-          >
-            <img
-              src={image}
-              alt={title}
-              className="w-full h-full object-cover"
-            />
-            <div 
-              className="absolute inset-0"
-              style={{
-                background: 'radial-gradient(2.3px at center, black, white)',
-                backgroundSize: '7.5px 7.5px',
-                mixBlendMode: 'screen'
-              }}
-            />
-          </div>
+          />
         </div>
       )}
 
@@ -76,7 +76,7 @@ export default function ProjectCard({
 
       {/* Bottom Row - pushed to bottom */}
       <div className="flex justify-end items-center mt-auto">
-        {onViewDetails && (
+        {isDetails && onViewDetails && (
           <button
             onClick={onViewDetails}
             className="text-black hover:underline text-sm font-medium cursor-pointer"

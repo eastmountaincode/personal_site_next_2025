@@ -1,0 +1,40 @@
+<svg width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="proteinGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="200" fill="#f1f5f9"/>
+  
+  <!-- Protein structure representation -->
+  <g stroke="url(#proteinGradient)" stroke-width="4" fill="none">
+    <!-- Alpha helix -->
+    <path d="M 50 100 Q 80 80, 110 100 Q 140 120, 170 100 Q 200 80, 230 100" />
+    
+    <!-- Beta sheet -->
+    <path d="M 250 80 L 350 80 M 250 90 L 350 90 M 250 100 L 350 100 M 250 110 L 350 110 M 250 120 L 350 120" stroke-width="2"/>
+    
+    <!-- Connecting loops -->
+    <path d="M 230 100 Q 240 60, 250 80" stroke-width="3"/>
+    <path d="M 350 120 Q 360 140, 370 160" stroke-width="3"/>
+  </g>
+  
+  <!-- Amino acid residues -->
+  <g fill="url(#proteinGradient)">
+    <circle cx="80" cy="90" r="6"/>
+    <circle cx="140" cy="110" r="6"/>
+    <circle cx="200" cy="90" r="6"/>
+    <circle cx="280" cy="85" r="5"/>
+    <circle cx="320" cy="95" r="5"/>
+    <circle cx="280" cy="115" r="5"/>
+    <circle cx="320" cy="105" r="5"/>
+  </g>
+  
+  <!-- Labels -->
+  <text x="140" y="40" font-family="Arial, sans-serif" font-size="14" fill="#64748b" text-anchor="middle">α-helix</text>
+  <text x="300" y="140" font-family="Arial, sans-serif" font-size="14" fill="#64748b" text-anchor="middle">β-sheet</text>
+</svg> 
