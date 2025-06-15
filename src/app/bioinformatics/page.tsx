@@ -56,11 +56,11 @@ export default function BioinformaticsPage() {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">Bioinformatics</h1>
-        <p className="text-lg text-gray-600 max-w-3xl">
+        {/* <p className="text-lg text-gray-600 max-w-3xl">
           Computational approaches to biological problems, from genomics and proteomics 
           to systems biology and drug discovery. Here are some of the projects I've worked on 
           in the intersection of biology and computer science.
-        </p>
+        </p> */}
       </div>
 
       {/* Projects Grid */}

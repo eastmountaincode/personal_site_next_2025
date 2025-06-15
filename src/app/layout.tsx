@@ -7,17 +7,10 @@ import { usePathname } from "next/navigation";
 import "./globals.css";
 
 const navigation = [
-  { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Projects", href: "/projects" },
   { name: "Blog", href: "/blog" },
   { name: "Bioinformatics", href: "/bioinformatics" },
-  { name: "Halftone Test with Rotation", href: "/halftone-test-with-rotation" },
-  { name: "Halftone Test No Rotation", href: "/halftone-test-no-rotation" },
-  { name: "Halftone with Gradient", href: "/halftone-with-gradient" },
-  { name: "Halftone with Image", href: "/halftone-with-image" },
-  { name: "Halftone with Image BW", href: "/halftone-image-bw" },
-  { name: "Dithering Test", href: "/dithering-test" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -71,7 +64,15 @@ export default function RootLayout({
               <div className={`flex justify-between items-center ${
                 isMobileMenuOpen ? 'mb-6' : 'mb-0'
               } md:mb-6`}>
-                <span className="text-3xl md:text-5xl font-bold mr-4">Andrew Boylan</span>
+                <Link 
+                  href="/"
+                  className={`text-3xl md:text-5xl font-bold mr-4 ${
+                    pathname === '/' ? 'font-bold' : 'hover:underline'
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Andrew Boylan
+                </Link>
                 
                 {/* Hamburger Button - only visible on mobile */}
                 <button
