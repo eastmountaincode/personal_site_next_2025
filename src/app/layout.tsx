@@ -4,12 +4,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { Provider } from 'jotai';
+import CrunchSlider from '@/components/CrunchSlider';
 import "./globals.css";
 
 const navigation = [
   { name: "About", href: "/about" },
-  { name: "Projects", href: "/projects" },
-  { name: "Blog", href: "/blog" },
+  { name: "Web", href: "/web" },
+  { name: "Installations", href: "/installations" },
   { name: "Bioinformatics", href: "/bioinformatics" },
   { name: "Contact", href: "/contact" },
 ];
@@ -20,7 +22,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Load the as-dithered-image web component globally
   useEffect(() => {
@@ -56,14 +63,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-        <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
+        <Provider>
+          <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
           {/* Sidebar */}
-          <aside className="w-full md:w-64 text-black">
-            <div className="p-4">
+          <aside className={`w-full md:w-64 text-black border-b border-gray-300 md:border-b-0 ${isClient ? 'md:h-screen md:sticky md:top-0 md:overflow-y-auto' : ''}`}>
+            <div className="p-4 md:pb-4">
               {/* Header with Logo and Hamburger */}
-              <div className={`flex justify-between items-center ${
-                isMobileMenuOpen ? 'mb-6' : 'mb-0'
-              } md:mb-6`}>
+              <div className={`flex justify-between items-center ${isMobileMenuOpen ? 'mb-6' : 'mb-0'} md:mb-6`}>
                 <Link 
                   href="/"
                   className={`text-3xl md:text-5xl font-bold mr-4 ${
@@ -115,6 +121,11 @@ export default function RootLayout({
                 })}
               </nav>
             </div>
+            
+            {/* Crunch Slider - bottom of sidebar */}
+            <div className="md:p-4">
+              <CrunchSlider />
+            </div>
           </aside>
 
           {/* Main content */}
@@ -122,8 +133,8 @@ export default function RootLayout({
           <main className="flex-1">
             {children}
           </main>
-        </div>
-
+          </div>
+        </Provider>
       </body>
     </html>
   );

@@ -1,3 +1,6 @@
+import { useAtomValue } from 'jotai';
+import { crunchOverrideAtom } from '@/state/atoms';
+
 interface ProjectCardProps {
   title: string;
   description: string;
@@ -9,6 +12,7 @@ interface ProjectCardProps {
   cutoff?: number;
   crunch?: number;
   isDetails?: boolean;
+  liveLink?: string;
 }
 
 export default function ProjectCard({
@@ -21,18 +25,21 @@ export default function ProjectCard({
   className = "",
   cutoff,
   crunch,
-  isDetails = true
+  isDetails,
+  liveLink
 }: ProjectCardProps) {
+  const crunchOverride = useAtomValue(crunchOverrideAtom);
+  const effectiveCrunch = crunchOverride ?? crunch;
   return (
     <div
       className={`rounded-lg transition-shadow duration-300 p-6 border border-2 border-gray-200 flex flex-col ${className}`}
     >
       {/* Card Header */}
       <div className="flex justify-between items-start mb-4">
-        <h3 className="text-xl font-semibold text-gray-900 line-clamp-2">
+        <h3 className="text-xl font-semibold text-gray-900">
           {title}
         </h3>
-        <span className="text-sm text-gray-500 ml-2 flex-shrink-0">
+        <span className="text-sm text-gray-500 ml-4 flex-shrink-0">
           {date}
         </span>
       </div>
@@ -44,22 +51,16 @@ export default function ProjectCard({
           <as-dithered-image 
             src={image}
             alt={title}
-            crunch={crunch}
+            crunch={effectiveCrunch}
             cutoff={cutoff}
             darkrgba="rgba(0, 0, 0, 255)"
             lightrgba="rgba(240, 240, 240, 0)"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover'
-
-            }}
           />
         </div>
       )}
 
       {/* Description */}
-      <p className="text-gray-600 mb-4 line-clamp-3">
+      <p className="text-gray-600 mb-4">
         {description}
       </p>
 
@@ -68,7 +69,7 @@ export default function ProjectCard({
         {tags.map((tag, index) => (
           <span
             key={index}
-            className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full"
+            className="px-2 py-1 bg-gray-200 text-gray-700 text-xs rounded-full"
           >
             {tag}
           </span>
@@ -76,7 +77,17 @@ export default function ProjectCard({
       </div>
 
       {/* Bottom Row - pushed to bottom */}
-      <div className="flex justify-end items-center mt-auto">
+      <div className="flex justify-between items-center mt-auto">
+        {liveLink && (
+          <a
+            href={liveLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:underline text-sm font-medium"
+          >
+            Live Link ↗
+          </a>
+        )}
         {isDetails && onViewDetails && (
           <button
             onClick={onViewDetails}

@@ -3,86 +3,92 @@
 import ProjectCard from "@/components/ProjectCard";
 
 export default function BioinformaticsPage() {
-  const projects = [
-    {
-      id: 1,
-      title: "Protein Structure Prediction",
-      description: "Machine learning approach to predict protein tertiary structure from amino acid sequences using transformer models.",
-      image: "/images/protein2.webp",
-      tags: ["Python", "PyTorch", "Protein Folding", "Deep Learning"],
-      date: "2026",
-      crunch: 1,
-      cutoff: 0.65,
-      isDetails: false
-    },
-    {
-      id: 2,
-      title: "Genomic Variant Analysis Pipeline",
-      description: "Automated pipeline for processing and analyzing genomic variants from whole genome sequencing data.",
-      image: "/dna-placeholder.svg",
-      tags: ["Bioconductor", "R", "NGS", "GATK"],
-      date: "2023",
-      crunch: 1,
-      cutoff: 0.8,
-      isDetails: false
-    },
-    {
-      id: 3,
-      title: "Drug-Target Interaction Network",
-      description: "Network analysis of drug-target interactions using graph neural networks to predict novel therapeutic targets.",
-      image: "/dna-placeholder.svg",
-      tags: ["NetworkX", "Graph ML", "Drug Discovery", "Python"],
-      date: "2023",
-      crunch: 1,
-      cutoff: 0.8,
-      isDetails: false
-    },
-    {
-      id: 4,
-      title: "scRNA-seq Cell Type Classification",
-      description: "Single-cell RNA sequencing analysis for automated cell type identification in immune system studies.",
-      image: "/dna-placeholder.svg",
-      tags: ["Scanpy", "Python", "Single Cell", "Immunology"],
-      date: "2024",
-      crunch: 1,
-      cutoff: 0.8,
-      isDetails: false
-    },
+    const projects = [
+        {
+            id: 1,
+            title: "Evaluating the Efficacy of a Liquid Biopsy Enhancement Drug",
+            description: "Engineered a custom cfDNA analysis pipeline for somatic variant calling, navigating challenges such as low coverage. Analyzed tumor-bearing mouse samples to evaluate drug-induced increases in ctDNA abundance, providing support for evaluating the efficacy of a candidate liquid-biopsy enhancement drug.",
+            image: "/images/bioinformatics/cfDNA.png",
+            tags: ["GATK", "cfDNA", "Python", "Variant Calling", "Snakemake", "ichorCNA", "Pandas", "Plotly"],
+            date: "2025",
+            crunch: 1,
+            cutoff: 0.7,
+            isDetails: false
+        },
 
-  ];
+        {
+            id: 2,
+            title: "scRNA-seq Characterization of A Novel Epithelial Cell Type in Breast Milk",
+            description: [
+                "Executed comprehensive single-cell RNA-seq analysis using Seurat and Harmony.",
+                "Characterized novel epithelial and immune cell subtypes, assessed differential expression in response to COVID-19 infection and vaccination,",
+                "and validated cell-type distributions using external datasets from CELLxGENE. Investigated chemokine-driven recruitment mechanisms,",
+                "supporting research on immune cell infiltration into breast milk."
+            ].join(" "),
+            image: "/images/bioinformatics/scRNAseq.png",
+            tags: ["R", "Seurat", "Harmony", "CELLxGENE", "scRNA-seq", "Docker"],
+            date: "2024",
+            crunch: 1,
+            cutoff: 0.6,
+            isDetails: false
+        },
+        {
+            id: 3,
+            title: "Investigating Genes Related to Endogenous Biosynthesis of Luciferin in Cypridinid Ostracods",
+            description: "Identified genes linked to the inception of bioluminescence via dN/dS analysis, time series analysis, and set theory. " +
+                "Reconstructed DNA MSAs from protein alignments and transcriptomes to supply the nucleotide context " +
+                "a published pipeline lacked. Automated a transcription assembly pipeline.",
+            image: "/images/bioinformatics/bioluminescence.png",
+            tags: ["Python", "R", "Biopython", "PAML", "OrthoFinder", "BLAST", "ete3", "Pandas"],
+            date: "2023",
+            crunch: 1,
+            cutoff: 0.1,
+            isDetails: false
+        },
+        {
+            id: 4,
+            title: "Discovering Structure–Function Links in PCSK9 Variants",
+            description: "Generated AlphaFold structures for a set of assay-associated protein mutations, " +
+                "performed structural analysis using KNN clustering and local RMSD visualization, " +
+                "discovered mutation-driven structural patterns correlated with assay scores, and " +
+                "identified variant combinations for further validation.",
+            image: "/images/bioinformatics/protein2.webp",
+            tags: ["Python", "AlphaFold", "KNN Clustering", "Pandas", "Matplotlib"],
+            date: "2023",
+            crunch: 1,
+            cutoff: 0.65,
+            isDetails: false
+        },
 
-  return (
-    <div className="p-6 md:p-8">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">Bioinformatics</h1>
-        {/* <p className="text-lg text-gray-600 max-w-3xl">
-          Computational approaches to biological problems, from genomics and proteomics 
-          to systems biology and drug discovery. Here are some of the projects I've worked on 
-          in the intersection of biology and computer science.
-        </p> */}
-      </div>
+    ];
 
-      {/* Projects Grid */}
-      <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))' }}>
-        {projects.map((project) => (
-          <ProjectCard
-            key={project.id}
-            title={project.title}
-            description={project.description}
-            image={project.image}
-            tags={project.tags}
-            date={project.date}
-            crunch={project.crunch}
-            cutoff={project.cutoff}
-            isDetails={project.isDetails}
-            onViewDetails={() => console.log(`View details for ${project.title}`)}
-          />
-        ))}
-      </div>
+    return (
+        <div className="p-6 md:p-8">
+            {/* Header */}
+            <div className="mb-8 md:hidden">
+                <h1 className="text-4xl font-bold text-gray-900 mb-4">Bioinformatics</h1>
+            </div>
 
-      {/* Call to Action */}
-      {/* <div className="mt-12 text-center">
+            {/* Projects Grid */}
+            <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))' }}>
+                {projects.map((project) => (
+                    <ProjectCard
+                        key={project.id}
+                        title={project.title}
+                        description={project.description}
+                        image={project.image}
+                        tags={project.tags}
+                        date={project.date}
+                        crunch={project.crunch}
+                        cutoff={project.cutoff}
+                        isDetails={project.isDetails}
+                        onViewDetails={() => console.log(`View details for ${project.title}`)}
+                    />
+                ))}
+            </div>
+
+            {/* Call to Action */}
+            {/* <div className="mt-12 text-center">
         <div className="bg-gray-50 rounded-lg p-8">
           <h3 className="text-2xl font-semibold text-gray-900 mb-4">
             Interested in Collaboration?
@@ -96,6 +102,6 @@ export default function BioinformaticsPage() {
           </button>
         </div>
       </div> */}
-    </div>
-  );
+        </div>
+    );
 } 
