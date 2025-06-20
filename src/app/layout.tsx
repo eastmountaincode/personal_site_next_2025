@@ -9,7 +9,6 @@ import CrunchSlider from '@/components/CrunchSlider';
 import "./globals.css";
 
 const navigation = [
-  { name: "About", href: "/about" },
   { name: "Web", href: "/web" },
   { name: "Installations", href: "/installations" },
   { name: "Bioinformatics", href: "/bioinformatics" },
@@ -72,9 +71,7 @@ export default function RootLayout({
               <div className={`flex justify-between items-center ${isMobileMenuOpen ? 'mb-6' : 'mb-0'} md:mb-6`}>
                 <Link 
                   href="/"
-                  className={`text-3xl md:text-5xl font-bold mr-4 ${
-                    pathname === '/' ? 'font-bold' : 'hover:underline'
-                  }`}
+                  className="text-3xl md:text-5xl font-bold mr-4 hover:underline"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Andrew Boylan
