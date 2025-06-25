@@ -1,40 +1,79 @@
+import { FaInstagram, FaGithub } from 'react-icons/fa';
+import { MdEmail } from 'react-icons/md';
+import Image from 'next/image';
+
 export default function Home() {
   return (
     <div className="p-6 md:p-8">
       <div className="max-w-4xl mx-auto">
         {/* Hero Section */}
-        <div className="flex flex-col lg:flex-row items-start gap-8 mb-8">
+        <div className="flex flex-col md:flex-row items-start gap-8 mb-8">
           {/* Photo */}
           <div className="flex-shrink-0">
-            <img 
-              src="/images/bio_pic_2.JPG"
-              alt="Andrew Boylan"
-              className="w-full h-96 lg:w-[490px] lg:h-[490px] object-cover rounded-lg shadow-lg"
-            />
-            <p className="text-sm text-gray-500 mt-2 text-center">Hiking Acatenango in Guatemala</p>
+            <div className="relative w-full h-96 lg:w-[400px] lg:h-[600px] rounded-lg shadow-lg overflow-hidden">
+              <Image 
+                src="/images/andrew-pic-1.jpg"
+                alt="Andrew Boylan"
+                fill
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
           </div>
           
           {/* Bio Text */}
           <div className="flex-1">
-            <p className="lg:text-4xl text-3xl font-bold text-gray-900 mb-6">
-              Andrew Boylan is a full-stack developer creating interactive experiences in the browser and beyond.
+            <p className="lg:text-4xl text-3xl text-gray-900 mb-6">
+              Creating interactive experiences in the browser and beyond.
             </p>
             
-            {/* Quick Links */}
-            <div className="flex flex-wrap gap-4">
+            {/* Info Details */}
+            <div className="space-y-4">
+              <div className="border-l-4 border-gray-300 pl-4">
+                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">Based in:</div>
+                <div className="text-gray-900">Boston</div>
+              </div>
+              <div className="border-l-4 border-gray-300 pl-4">
+                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">Most Recent Project:</div>
+                <div className="text-gray-900">A Raspberry Pi-powered interactive payphone installed in front of a vintage store in Los Angeles</div>
+              </div>
+              <div className="border-l-4 border-gray-300 pl-4">
+                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">Currently playing:</div>
+                <div className="text-gray-900">Deltarune Chapter 3 & 4</div>
+              </div>
+              <div className="border-l-4 border-gray-300 pl-4">
+                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">My books are:</div>
+                <div className="text-gray-900">Open - let's work!</div>
+              </div>
+            </div>
+            
+            {/* Social Links */}
+            <div className="flex gap-4 mt-6 ml-5">
               <a 
-                href="/web" 
-                className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
+                href="https://instagram.com/yourusername" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
               >
-                View Web Projects
+                <FaInstagram className="w-6 h-6" />
               </a>
+              
               <a 
-                href="/contact" 
-                className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                href="mailto:your.email@example.com"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
               >
-                Get In Touch
+                <MdEmail className="w-6 h-6" />
+              </a>
+              
+              <a 
+                href="https://github.com/eastmountaincode" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                <FaGithub className="w-6 h-6" />
               </a>
             </div>
+            
           </div>
         </div>
       </div>

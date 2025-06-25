@@ -2,13 +2,13 @@
 
 import ProjectCard from "@/components/ProjectCard";
 
-export default function InstallationsPage() {
+export default function InstallationPage() {
   const projects = [
     {
       id: 1,
       title: "Poem Car",
       description: "I covered my car in fridge poetry magnets. Anonymous poems appeared and I documented them on an Instagram acocunt..",
-      image: "/images/installations/poem_car.png",
+      image: "/images/installation/poem_car.png",
       tags: [],
       date: "2018",
       crunch: 1,
@@ -24,7 +24,7 @@ export default function InstallationsPage() {
     <div className="p-6 md:p-8">
       {/* Header */}
       <div className="mb-8 md:hidden">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">Installations</h1>
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">Installation</h1>
       </div>
 
       {/* Projects Grid */}

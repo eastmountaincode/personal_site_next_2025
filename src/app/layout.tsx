@@ -1,6 +1,5 @@
 "use client";
 
-import type { Metadata } from "next";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
@@ -10,9 +9,8 @@ import "./globals.css";
 
 const navigation = [
   { name: "Web", href: "/web" },
-  { name: "Installations", href: "/installations" },
+  { name: "Installation", href: "/installation" },
   { name: "Bioinformatics", href: "/bioinformatics" },
-  { name: "Contact", href: "/contact" },
 ];
 
 export default function RootLayout({
@@ -120,9 +118,11 @@ export default function RootLayout({
             </div>
             
             {/* Crunch Slider - bottom of sidebar */}
-            <div className="md:p-4">
-              <CrunchSlider />
-            </div>
+            {(pathname === '/installation' || pathname === '/web' || pathname === '/bioinformatics') && (
+              <div className="md:p-4">
+                <CrunchSlider />
+              </div>
+            )}
           </aside>
 
           {/* Main content */}

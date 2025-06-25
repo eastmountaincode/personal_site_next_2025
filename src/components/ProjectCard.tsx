@@ -47,7 +47,7 @@ export default function ProjectCard({
       {/* Image - only show if provided */}
       {image && (
         <div className="mb-4 aspect-[2/1] rounded-md overflow-hidden">
-          {/* @ts-ignore - Custom web component */}
+          {/* @ts-expect-error - Custom web component */}
           <as-dithered-image 
             src={image}
             alt={title}
