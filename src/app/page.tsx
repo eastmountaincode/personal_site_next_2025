@@ -42,14 +42,14 @@ export default function Home() {
               </div>
               <div className="border-l-4 border-gray-300 pl-4">
                 <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">My books are:</div>
-                <div className="text-gray-900">Open - let's work!</div>
+                <div className="text-gray-900">Open - let&apos;s work!</div>
               </div>
             </div>
             
             {/* Social Links */}
             <div className="flex gap-4 mt-6 ml-5">
               <a 
-                href="https://instagram.com/yourusername" 
+                href="https://www.instagram.com/ndrewboylan/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-gray-900 transition-colors"
@@ -58,7 +58,7 @@ export default function Home() {
               </a>
               
               <a 
-                href="mailto:your.email@example.com"
+                href="mailto:andreweboylan@gmail.com"
                 className="text-gray-600 hover:text-gray-900 transition-colors"
               >
                 <MdEmail className="w-6 h-6" />
