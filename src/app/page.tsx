@@ -1,6 +1,5 @@
 import { FaInstagram, FaGithub } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
-import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -10,14 +9,11 @@ export default function Home() {
         <div className="flex flex-col md:flex-row items-start gap-8 mb-8">
           {/* Photo */}
           <div className="flex-shrink-0">
-            <div className="relative w-full h-96 lg:w-[400px] lg:h-[600px] rounded-lg shadow-lg overflow-hidden">
-              <Image 
-                src="/images/andrew-pic-1.jpg"
-                alt="Andrew Boylan"
-                fill
-                style={{ objectFit: 'cover' }}
-              />
-            </div>
+            <img 
+              src="/images/andrew-pic-1.jpg"
+              alt="Andrew Boylan"
+              className="w-full max-w-sm mx-auto md:max-w-xs lg:max-w-md h-auto max-h-96 md:max-h-none rounded-lg shadow-lg object-cover"
+            />
           </div>
           
           {/* Bio Text */}
