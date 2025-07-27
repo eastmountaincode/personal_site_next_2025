@@ -9,7 +9,18 @@ import ProjectCard from "@/components/ProjectCard";
 export default function WebPage() {
   const projects = [
     {
-      id: 1,
+        id: 1,
+        title: "Doom Meeting",
+        description: "A web based live video feed app integrated into a live performance. Prompted by the performer, users access the site via a QR code, which allows them to project their video feed onto a projected display page.",
+        image: "/images/web/doom_meeting.jpg",
+        tags: ["Next.js", "TypeScript", "Tailwind", "Jotai", "LiveKit"],
+        date: "2025",
+        crunch: 1,
+        cutoff: 0.3,
+        isDetails: false,
+      },
+    {
+      id: 2,
       title: "Diorama Web Game",
       description: "A web game to promote an artist’s new single, featuring drag-and-drop interaction, proximity-triggered scenes, and dynamic audio.",
       image: "/images/web/diorama_header.png",
@@ -21,7 +32,7 @@ export default function WebPage() {
       liveLink: "https://www.lailasmith.com/"
     },
     {
-      id: 2,
+      id: 3,
       title: "YouTube Sequencer",
       description: "A full-stack web app that re-purposes YouTube into a drum sequencer, allowing users to compose, share, and remix rhythm patterns.",
       image: "/images/web/yts_header.png",
@@ -33,7 +44,7 @@ export default function WebPage() {
       liveLink: "https://youtubesequencer.com/"
     },
     {
-        id: 7,
+        id: 8,
         title: "Sandwich Alignment Game",
         description: "Not just a game about putting sandwiches on an alignment grid - it's a tool for introspection.",
         image: "/images/web/sandwich_game_header.png",
@@ -45,7 +56,7 @@ export default function WebPage() {
         liveLink: "https://sandwich-alignment.vercel.app/about"
     },
     {
-      id: 3,
+      id: 4,
       title: "Gridworld Streaming",
       description: "A responsive music streaming platform built for an independent artist, exploring new models of direct-to-artist financial support.",
       image: "/images/web/gridworld_streaming_header.png",
@@ -57,7 +68,7 @@ export default function WebPage() {
       liveLink: "https://www.gridworldstreaming.com/"
     },
     {
-        id: 4,
+        id: 5,
         title: "For Edmonia: Together Sculpting",
         description: "A web app allowing users to explore sculptor Edmonia Lewis's archive while creating their own collage.",
         image: "/images/web/edmonia_header.png",
@@ -69,7 +80,7 @@ export default function WebPage() {
         liveLink: "https://foredmonia.com/collage"
       },
       {
-        id: 5,
+        id: 6,
         title: "Virtual Free Little Library",
         description: "A file-sharing site to recreate the experience of a free little library, on the web.",
         image: "/images/web/free_little_library_header.png",
@@ -81,7 +92,7 @@ export default function WebPage() {
         liveLink: "https://freewaterhouse.com/library/lending_library.php"
       },
       {
-        id: 6,
+        id: 7,
         title: "Collaborative Collage",
         description: "A collage creation tool utilizing web sockets for real-time multi-user collaboration.",
         image: "/images/web/collab_collage.png",

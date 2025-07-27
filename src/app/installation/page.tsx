@@ -40,10 +40,7 @@ export default function InstallationPage() {
             </div>
 
             {/* Projects Grid */}
-            <div className="grid gap-6" style={{
-                gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-                maxWidth: 'min(100%, 500px)' // Limits to roughly 2-column width on desktop
-            }}>
+            <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))' }}>
                 {projects.map((project) => (
                     <ProjectCard
                         key={project.id}
