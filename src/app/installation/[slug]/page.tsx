@@ -1,28 +1,32 @@
+// src/app/installation/[slug]/page.tsx
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import { notFound } from 'next/navigation';
 import ProjectLayout from '@/components/ProjectLayout';
 import { installationProjects } from '@/data/installation-projects';
 import path from 'path';
 import { promises as fs } from 'fs';
-import MDXContent from '@/components/MDXContent';
+import { MDXRemote } from 'next-mdx-remote/rsc';
+import { useMDXComponents } from '../../../../mdx-components';
 
-export default async function ProjectPage({params}: {params: Promise<{slug: string}>}) {
+export default async function ProjectPage({
+    params,
+}: {
+    params: Promise<{ slug: string }>;
+}) {
     const { slug } = await params;
 
-    // Find the project data by slug
     const project = installationProjects.find(p => p.slug === slug);
+    if (!project) return notFound();
 
-    if (!project) {
-        return notFound();
-    }
-
-    const mdxPath = path.join(process.cwd(), 'src', 'content', 'installation', `${slug}.mdx`)
-    let mdxContent = null;
-    try {
-        mdxContent = await fs.readFile(mdxPath, 'utf8');
-    } catch (error) {
-        console.error(`Error reading MDX file: ${error}`);
-        mdxContent = null;
-    }
+    const mdxPath = path.join(
+        process.cwd(),
+        'src',
+        'content',
+        'installation',
+        `${slug}.mdx`
+    );
+    const mdxContent = await fs.readFile(mdxPath, 'utf8');
 
     return (
         <ProjectLayout
@@ -36,10 +40,7 @@ export default async function ProjectPage({params}: {params: Promise<{slug: stri
             backUrl="/installation"
             backText="Back to Installation Projects"
         >
-            {mdxContent
-                ? <MDXContent source={mdxContent} />
-                : <div>Loading...</div>
-            }
+            <MDXRemote source={mdxContent} components={useMDXComponents()} />
         </ProjectLayout>
     );
 }
