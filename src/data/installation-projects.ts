@@ -4,7 +4,7 @@ export const installationProjects = [
         title: "Denial Payphone",
         description: "An interactive payphone installed in Echo Park, Los Angeles. Features keyword detection and sentiment analysis, powered by a Raspberry Pi. 15 billboards in LA were purchased to direct users to the payphone location.",
         image: "/images/installation/denial_payphone.jpg",
-        tags: ['Raspberry Pi', 'Python', 'Vosk'],
+        tags: ['Raspberry Pi', 'Python', 'Vosk', 'Twilio'],
         date: "2025",
         crunch: 1,
         cutoff: 0.1,
