@@ -10,7 +10,7 @@ export default function InstallationPage() {
         <div className="p-6 md:p-8">
             {/* Header */}
             <div className="mb-8 md:hidden">
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">Installation</h1>
+                <h1 className="text-3xl font-bold text-gray-900 mb-4">Installation</h1>
             </div>
 
             {/* Projects Grid */}

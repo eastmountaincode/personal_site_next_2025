@@ -42,7 +42,7 @@ export default function ProjectLayout({
       <div className="mb-8">
         <a
           href={backUrl}
-          className="text-blue-600 hover:underline text-sm font-medium"
+          className="text-black hover:underline text-sm font-medium"
         >
           ← {backText}
         </a>
@@ -104,7 +104,7 @@ export default function ProjectLayout({
       </div>
 
       {/* Content Area */}
-      <div className="prose prose-lg max-w-none">
+      <div>
         {children}
       </div>
     </div>

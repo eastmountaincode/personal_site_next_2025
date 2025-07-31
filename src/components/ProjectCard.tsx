@@ -32,8 +32,16 @@ export default function ProjectCard({
   const effectiveCrunch = crunchOverride ?? crunch;
   return (
     <div
-      className={`p-6 border border-1 border-black flex flex-col ${className}`}
+      className={`${className}`}
+      style={{
+        clipPath: 'polygon(20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px), 0 20px)',
+        background: 'black',
+        padding: '1px'
+      }}
     >
+      <div className="p-6 bg-gray-100 flex flex-col h-full" style={{
+        clipPath: 'polygon(19px 0, calc(100% - 19px) 0, 100% 19px, 100% calc(100% - 19px), calc(100% - 19px) 100%, 19px 100%, 0 calc(100% - 19px), 0 19px)'
+      }}>
       {/* Card Header */}
       <div className="flex justify-between items-start mb-4">
         <h3 className="text-xl font-semibold text-gray-900">
@@ -46,7 +54,7 @@ export default function ProjectCard({
 
       {/* Image - only show if provided */}
       {image && (
-        <div className="mb-4 aspect-[2/1] rounded-md overflow-hidden">
+        <div className="mb-4 aspect-[2/1] overflow-hidden">
           {/* @ts-expect-error - Custom web component */}
           <as-dithered-image 
             src={image}
@@ -96,6 +104,7 @@ export default function ProjectCard({
             More Details →
           </button>
         )}
+      </div>
       </div>
     </div>
   );

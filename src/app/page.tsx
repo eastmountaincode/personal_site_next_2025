@@ -12,7 +12,7 @@ export default function Home() {
             <img 
               src="/images/andrew-pic-1.jpg"
               alt="Andrew Boylan"
-              className="w-full max-w-sm mx-auto md:max-w-xs lg:max-w-md h-auto max-h-96 md:max-h-none rounded-lg shadow-lg object-cover"
+              className="w-full max-w-sm mx-auto md:max-w-xs lg:max-w-sm h-auto max-h-96 md:max-h-none object-cover"
             />
           </div>
           
