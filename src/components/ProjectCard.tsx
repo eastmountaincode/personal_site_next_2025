@@ -32,7 +32,7 @@ export default function ProjectCard({
   const effectiveCrunch = crunchOverride ?? crunch;
   return (
     <div
-      className={`rounded-lg transition-shadow duration-300 p-6 border border-2 border-gray-200 flex flex-col ${className}`}
+      className={`p-6 border border-1 border-black flex flex-col ${className}`}
     >
       {/* Card Header */}
       <div className="flex justify-between items-start mb-4">
@@ -69,7 +69,7 @@ export default function ProjectCard({
         {tags.map((tag, index) => (
           <span
             key={index}
-            className="px-2 py-1 bg-gray-200 text-gray-700 text-xs rounded-full"
+            className="border border-1 border-black px-2 py-1 bg-gray-200 text-gray-700 text-xs rounded-full select-none"
           >
             {tag}
           </span>
@@ -77,13 +77,13 @@ export default function ProjectCard({
       </div>
 
       {/* Bottom Row - pushed to bottom */}
-      <div className="flex justify-between items-center mt-auto">
+      <div className="flex flex-col justify-between items-start mt-auto">
         {liveLink && (
           <a
             href={liveLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 hover:underline text-sm font-medium"
+            className="text-black hover:underline text-sm font-medium"
           >
             Live Link ↗
           </a>
@@ -93,7 +93,7 @@ export default function ProjectCard({
             onClick={onViewDetails}
             className="text-black hover:underline text-sm font-medium cursor-pointer"
           >
-            View Details →
+            More Details →
           </button>
         )}
       </div>

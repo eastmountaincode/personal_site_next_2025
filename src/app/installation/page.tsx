@@ -1,36 +1,10 @@
 "use client";
 
 import ProjectCard from "@/components/ProjectCard";
+import { installationProjects } from "@/data/installation-projects";
 
 export default function InstallationPage() {
-    const projects = [
-        {
-            id: 1,
-            title: "Denial Payphone",
-            description: "An interactive payphone installed in Echo Park, Los Angeles. Features keyword detection and sentiment analysis, powered by a Raspbery Pi. 15 billboards in LA were purchased to direct users to the payphone location.",
-            image: "/images/installation/denial_payphone.jpg",
-            tags: [],
-            date: "2025",
-            crunch: 1,
-            cutoff: 0.1,
-            isDetails: false,
-            liveLink: "https://denial-archive.vercel.app/"
-        },
-        {
-            id: 2,
-            title: "Poem Car",
-            description: "I covered my car in fridge poetry magnets. Anonymous poems appeared and I documented them on an Instagram acocunt.",
-            image: "/images/installation/poem_car.png",
-            tags: [],
-            date: "2018",
-            crunch: 1,
-            cutoff: 0.9,
-            isDetails: false,
-            liveLink: "https://www.instagram.com/poem_car/"
-        }
-
-
-    ];
+    const projects = installationProjects;
 
     return (
         <div className="p-6 md:p-8">
@@ -53,7 +27,11 @@ export default function InstallationPage() {
                         cutoff={project.cutoff}
                         isDetails={project.isDetails}
                         liveLink={project.liveLink}
-                        onViewDetails={() => console.log(`View details for ${project.title}`)}
+                        onViewDetails={() => {
+                            if (project.slug) {
+                                window.location.href = `/installation/${project.slug}`;
+                            }
+                        }}
                     />
                 ))}
             </div>
