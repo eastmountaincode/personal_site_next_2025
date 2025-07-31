@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
+
 import { notFound } from 'next/navigation';
 import ProjectLayout from '@/components/ProjectLayout';
 import { installationProjects } from '@/data/installation-projects';
@@ -6,16 +9,17 @@ import { promises as fs } from 'fs';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { useMDXComponents } from '../../../../mdx-components';
 
-export default async function ProjectPage({ params }: { params: { slug: string } }) {
-    const resolvedParams = await params;
+export default async function ProjectPage({params}: {params: Promise<{slug: string}>}) {
+    const { slug } = await params;
+
     // Find the project data by slug
-    const project = installationProjects.find(p => p.slug === resolvedParams.slug);
+    const project = installationProjects.find(p => p.slug === slug);
 
     if (!project) {
         return notFound();
     }
 
-    const mdxPath = path.join(process.cwd(), 'src', 'content', 'installation', `${resolvedParams.slug}.mdx`)
+    const mdxPath = path.join(process.cwd(), 'src', 'content', 'installation', `${slug}.mdx`)
     let mdxContent = null;
     try {
         mdxContent = await fs.readFile(mdxPath, 'utf8');
