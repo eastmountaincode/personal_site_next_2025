@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Provider } from 'jotai';
-import { MDXProvider } from '@mdx-js/react';
 import CrunchSlider from '@/components/CrunchSlider';
 import "./globals.css"
 

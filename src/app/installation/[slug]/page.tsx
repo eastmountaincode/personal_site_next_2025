@@ -1,13 +1,9 @@
-export const dynamic = 'force-dynamic';
-export const fetchCache = 'force-no-store';
-
 import { notFound } from 'next/navigation';
 import ProjectLayout from '@/components/ProjectLayout';
 import { installationProjects } from '@/data/installation-projects';
 import path from 'path';
 import { promises as fs } from 'fs';
-import { MDXRemote } from 'next-mdx-remote/rsc';
-import { useMDXComponents } from '../../../../mdx-components';
+import MDXContent from '@/components/MDXContent';
 
 export default async function ProjectPage({params}: {params: Promise<{slug: string}>}) {
     const { slug } = await params;
@@ -41,7 +37,7 @@ export default async function ProjectPage({params}: {params: Promise<{slug: stri
             backText="Back to Installation Projects"
         >
             {mdxContent
-                ? <MDXRemote source={mdxContent} components={useMDXComponents()} />
+                ? <MDXContent source={mdxContent} />
                 : <div>Loading...</div>
             }
         </ProjectLayout>
