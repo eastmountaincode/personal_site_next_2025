@@ -9,11 +9,7 @@ import { promises as fs } from 'fs';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { useMDXComponents } from '../../../../mdx-components';
 
-export default async function ProjectPage({
-    params,
-}: {
-    params: Promise<{ slug: string }>;
-}) {
+export default async function InstallationProjectPage({params}: { params: Promise<{ slug: string }>}) {
     const { slug } = await params;
 
     const project = installationProjects.find(p => p.slug === slug);

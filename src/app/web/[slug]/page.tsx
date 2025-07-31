@@ -1,40 +1,28 @@
-'use client';
+// src/app/installation/[slug]/page.tsx
+/* eslint-disable react-hooks/rules-of-hooks */
 
 import { notFound } from 'next/navigation';
-import { use, useEffect, useState } from 'react';
 import ProjectLayout from '@/components/ProjectLayout';
 import { webProjects } from '@/data/web-projects';
+import path from 'path';
+import { promises as fs } from 'fs';
+import { MDXRemote } from 'next-mdx-remote/rsc';
+import { useMDXComponents } from '../../../../mdx-components';
 
-interface ProjectPageProps {
-    params: Promise<{
-        slug: string;
-    }>;
-}
+export default async function WebProjectPage({params}: { params: Promise<{ slug: string }>}) {
+    const { slug } = await params;
 
-export default function ProjectPage({ params }: ProjectPageProps) {
-    const resolvedParams = use(params);
-    const [Component, setComponent] = useState<React.ComponentType | null>(null);
+    const project = webProjects.find(p => p.slug === slug);
+    if (!project) return notFound();
 
-    // Find the project data by slug
-    const project = webProjects.find(p => p.slug === resolvedParams.slug);
-
-    useEffect(() => {
-        import(`@/content/web/${resolvedParams.slug}.tsx`)
-            .then(module => setComponent(() => module.default))
-            .catch(() => setComponent(null));
-    }, [resolvedParams.slug]);
-
-    if (!project) {
-        return notFound();
-    }
-
-    if (Component === null) {
-        return notFound();
-    }
-
-    if (!Component) {
-        return <div className="max-w-4xl mx-auto p-6 md:p-8">Loading...</div>;
-    }
+    const mdxPath = path.join(
+        process.cwd(),
+        'src',
+        'content',
+        'web',
+        `${slug}.mdx`
+    );
+    const mdxContent = await fs.readFile(mdxPath, 'utf8');
 
     return (
         <ProjectLayout
@@ -48,7 +36,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             backUrl="/web"
             backText="Back to Web Projects"
         >
-            <Component />
+            <MDXRemote source={mdxContent} components={useMDXComponents()} />
         </ProjectLayout>
     );
 }
