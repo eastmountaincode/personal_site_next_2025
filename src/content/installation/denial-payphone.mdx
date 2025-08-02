@@ -158,15 +158,13 @@ Then I started cleaning up the codebase. Moving constants to a separate file, re
     I stopped my daily project diary at some point and recorded these notes when I got back from LA, so they may be a bit more jumbled.
 </aside>
 
-
-I'm not sure even where to begin, but I wanted to record my thoughts before they fade away. I remember implementing the finite state machine and implementing sentiment detection sentiment analysis with the idea that we would dial in later.
+I'm not sure even where to begin, but I wanted to record my thoughts before they fade away. I remember implementing the finite state machine and implementing sentiment analysis with the idea that we would dial in later.
  
-Basically I got the experience in a working state and I packed everything up and I flew to Los Angeles and I immediately met Laila in Echo Park and we immediately hopped in an Uber and went to the salvage shop to pick up the phone chassis. A guy showed us all these machines with flashing lights that he had rewired - they were all these ancient machines. There was one that was like an old computer that was puffing out air. It was like a respirator or something, actually breathing out air. 
+Basically I got the experience into a working state and packed up flew to Los Angeles. I immediately met Laila and we went to the salvage shop in Burbank to pick up the phone chassis. A guy showed us all these machines with flashing lights that he had rewired - they were all these ancient machines. There was one that was like an old computer that was puffing out air. It was like a respirator or something, actually breathing out air. 
   
 Anyway, then we got a really long Uber to where Jamin and Natalie live. We go in and basically almost immediately we start working on the payphone because we're all so excited. We start taking it apart right in front of the door inside their house. We get dust everywhere. We really should've been doing it outside, but we were just so excited to figure this thing out. At some point we went to go get Burmese food and I don't remember much else except that Laila recorded the audio files.
 
 In the morning someone made french toast and we were just working all day. Jamin was working on painting the phone and taking it apart and cleaning it. Jamin and Natalie did a lot of work with cleaning the metal parts and the phone really looked gorgeous after they were done with it. At some point we took a break and went to the mall. We were working until late because the next day was install day. At like 2 AM we basically realized that the proximity sensor was not going to work because it was outputting different numbers if it was positioned even slightly differently. (It was pointed out towards the user) My proximity threshold was a hardcoded value so that was a big issue. Luckily we realized that the lever that moves when you put the phone on the hook was moving a component on the inside of the phone, and that we could use the proximity sensor on the inside of the phone. Because it uses infrared rather than visible light, being on the inside of the payphone wouldn't be an issue. I'm super proud of us for encountering a project-breaking problem at literally the 11th hour and finding a robust solution that worked better than the initial mechanism. 
-
 
 <figure className="max-w-xl w-full py-2 m-0">
     <img
