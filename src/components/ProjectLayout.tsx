@@ -62,7 +62,7 @@ export default function ProjectLayout({
 
         {/* Project Image */}
         {image && (
-          <div className="mb-6 aspect-[2/1] rounded-md overflow-hidden">
+          <div className="mb-6 aspect-[2/1] overflow-hidden">
             {/* @ts-expect-error - Custom web component */}
             <as-dithered-image 
               src={image}

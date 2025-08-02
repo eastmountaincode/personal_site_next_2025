@@ -21,7 +21,7 @@
         <img src="/images/installation/content/denial-payphone/billboard_1.PNG" className="w-full max-w-lg"></img>
     </li>
     <li>
-        An in-house analytics dashboard monitors call volume, and manages a database of captured phone numbers from Twilio.
+        An in-house analytics dashboard monitors call volume, and manages a database of captured phone numbers from Twilio. At the time of writing we have 240 unique contacts to use for future promotion!
     </li>
     <li className="list-none">
         <img src="/images/installation/content/denial-payphone/analytics.png" className="w-full max-w-2xl"></img>
@@ -46,10 +46,137 @@ Originally, the idea was to put one payphone underneath the billboard, and two i
 
 One problem: there was no Wi-Fi at Michael's store, which meant any speech-to-text or sentiment analysis would need to run locally. 
 
-I fineagled my way into some time off work, and spent the next few weeks writing Python, taking way too many trips to Microcenter, learning to solder, and getting knee-deep in open-source transcription models. 
+I fineagled my way into some time off work, and spent the next few weeks writing Python, taking way too many trips to Microcenter, learning to solder without inhaling lead, and getting knee-deep in open-source transcription models. 
+
+# Dev Journal
+
+## Day 1
+
+I'm calling today day 1 even though I've already had 3 meetings with Laila and I've already got the Raspberry Pi set up with Raspbian. But good stories usually start in the middle of the action anyway. Yesterday I got live transcription with sherpa-onnx running, but I still needed something for keyword detection, so I dove into Picovoice Rhino. That took of most of the morning and I was happy with the result - good latency, good accuracy. At this point, I'm just trying to put together the pieces that I'll string together later. One annoying thing about Picovoice Rhino is that you can only fine-tune their model on your keywords once (on the free tier). Which means, if you download the model (which runs the fine-tuning process), that's it. If I need to change my keyword model I'll have to get sneaky with making another free tier account, but for now it should be ok; this keyword model is just for detecting 'yes', 'no', 'ok', 'sure', and 'nope'. 
+
+In the afternoon I looked into SMS services, since users will text a number on the billboards and receive the location of the payphone. Twilio seemed to be the most reasonable option, and I sent my research and solution proposal over to Laila. 
+
+Finally I worked on converting the app flow that Laila and I conjured up in a meeting into something more easily translated into code. My idea is to have an Orchestrator class that handles individual code blocks, their timing, where they should save files, and so on. 
+
+<figure className="max-w-3xl w-full py-2 m-0">
+    <img
+        src="/images/installation/content/denial-payphone/app_flow_miro.png"
+        className="w-full"
+        alt="App flow Miro board"
+    />
+    <figcaption className="text-center text-gray-500 text-xs mt-0">
+        App flow diagram made in Miro.
+    </figcaption>
+</figure>
+
+While working on the updated app flow, I realized that the time it takes for sherpa-onnx to start up might be a problem, which prompted me to explore Vosk, another open-source option for STT (speech-to-text). I got it to work and it seems to be WAY more accurate, and it's quicker to start as well. Sherpa out, Vosk in. I started using a new lavalier microphone instead of my M-AUDIO interface, which supports a different sample rate than the audio interface.
+
+Oh well. Time for bed.
+
+## Day 2
+
+In the morning I worked at Ula Cafe, finishing up the new Miro diagram for the app workflow, translating the narrative into function blocks. 
+
+I got a workout in and when I got back the new USB handset phone had arrived, so I was eager to test it. It worked right out of the box. I used  `alsamixer` to raise the playback level a bit. I'm pretty sure this will be a good user experience. So when the other phone handset gets here, which looks more like a sleek office phone and less like a payphone phone, I'll just return it. Then I went to Microcenter to pick up a USB to TTL Serial cable. This will let me interface with the Pi out in the field when I don't have Wi-Fi. 
+
+When I got back something was bothering me. For some reason I hesitated to get started on the code and I was restless. Then I realized I hadn't figured out the proximity detection issue. I still needed to figure out how to determine when the phone was "off the hook" of the payphone. I looked into RFID, but that didn't seem to be the right solution. It seemed to be more about exchanging data and less about proximity detection. I found something called the hall effect sensor, which grounds a circuit when a magnet is near, which the Pi can read. So tomorrow I'll go to Microcenter again and pick one up. I have some magnets at home. We need this proximity detection to be flexible. I can't guarentee that the phone will be right against a sensor. I don't have the actual payphone to test on, and I won't be able to test it until I actually go to LA. 
+
+I'm really hoping this works. Otherwise maybe something like this will work? [Adafruit VCNL4200 IR Proximity and Light Sensor](https://www.adafruit.com/product/4161). They have it at Microcenter ([product page](https://www.microcenter.com/product/691533/adafruit-industries-vcnl4200-long-distance-ir-proximity-and-light-sensor-stemma-qt-qwiic)). I can return it in 30 days if it doesn't work. So that's probably the way to go... Just make sure to pay attention to what kind of cables I need. Ok never mind, I have all the types of cables I would need.
+
+Anyway, I finished off the day by getting started on the Orchestrator, and a few utility functions like logging, playing audio files, and creating a session folder. I concluded it would be best to have one log per session, stored in the session folder. I figure it'll be easier to concatenate log files for queries than it would be to parse a big daily log file. 
+
+Tomorrow I'll get logging working properly, go to Microcenter for the Hall effect sensor and the proximity sensor, and continue working on the code. I have basically everything I need to make the code a reality - transcription, keyword detection, and audio playing. It's just a matter of implementing everything in a flexible way to accommodate inevitable last minute changes. 
+
+## Day 3
+
+Today I got started on implementing some of the app flow. I implemented the listening for amplitude, where Laila says "say something so I know it's you", and the user either responds or stays silent. 
+
+Then I went to Microcenter (...again) to pick up the hall effect sensors and proximity sensors. Unfortunately the proximity sensor required some soldering, so I bought some soldering supplies, came home, and watched some tutorials. (I don't know how to solder... well... didn't). Soldering was kind of intense process, since I had never done it before and I was pretty worried about inhaling lead. Eventually it worked out. Later I realized there was a plug on the sensor and I may not have even need to go through all that to get it connected to the RBP GPIO pins. Oh well. Proximity sensor worked great, just what we needed. The hall effect sensor I initially tested but was way too strict with what it considered a connection. 
+
+Once I got the code for the proximity sensor set up, I worked on integrating proximity into the app flow, allowing the program to respond to "phone on-hook" and "phone off-hook" events. I wanted to be able to interrupt ANYTHING if the user put the phone back on the hook, so I tried using multiprocessing to run the "session" (what I'm calling one instance of a user picking up and using the payphone) in a separate thread, but that created all kind of issues with the proximity sensor and audio I/O. By the end of the evening, I was resolved to implement listening for "phone on-hook" events in every function, running on a single thread. Since I want to be able to interrupt audio out or recording, this means I need to do these things in chunks and check if the phone is back on the hook every chunk. You can see why I avoided this. But given the issue with multiprocessing and hardware, I think this is the best way. 
+
+## Day 4
+
+I started the day getting the on hook functionality working. Basically, anytime the user puts the phone back on the hook, we want to stop what we're doing and return to initial state. Since using multiple threads wasn't working, I pass in a `is_on_hook` function to functions that play or record audio, and between chunks, I query the sensor to see if the phone has been on the hook (~proximity > 200) for at least 2 seconds. So more boilerplate code, but the solution is working. When I was trying to get multithreading to work, I separated out run_session from orchestrator, and I kept working with that pattern. 
+
+Then I set things up so the Vosk model is loaded by orchestrator once at startup, and then any session can use it. This solves the problem of the loading time for Vosk transcription. We use one Model for everything, and each transcription instead gets a new KaldiRecognizer and audio queue. 
+
+The rest of the day and evening was just working through the app flow. I made a new `play_and_log` function to cut down on code in `run_session`. This function plays an audio file, and if the user puts the phone back on the hook during the audio, it does a `log_event` and returns false, allowing us to exit out of the session.
+
+Today was also getting the keyword detection with Picovoice Rhino integrated. They deleted both my accounts since I made two (against their rules), so hopefully nothing shady happens with my local model. It's probably a good idea to implement a backup keyword detection solution in case they nuke my access key somehow. 
+
+## Day 5
+
+In the morning I was navigating the waters of Twilio to determine what would be possible for us, given that we're launching in 11 days. The previous night Laila rented a local number. I applied for A2P 10DLC verification. Twilio said the process takes 2 - 3 weeks to complete, which isn't enough time for us, but we decided to try anyway. However, then I started exploring the voice possibility, which Laila was excited about anyway. Turns out, no verification is needed to handle incoming calls, so I recorded a demo `.wav` and wrote a simple Javascript backend to serve the audio and deployed it on Vercel and gave Twilio the endpoint and boom, it worked! Users could call the number and hear the audio file, which would tell them the location of the payphone. Laila was hyped about this and quickly showed our other friends. 
+
+<img src="/images/installation/content/denial-payphone/laila_text.PNG" style={{ maxWidth: '200px', width: '100%' }}></img>
 
 
+Later in the evening she showed me some mockups for the billboard and all the messages were "call me", so it seems like that's how we're going to proceed. Unfortunately it seems if someone does text us, we'll still be charged for it, and there's nothing to stop a user from calling the number repeatedly and racking up charges for us. I don't think there's anything I can do about that, since any logic to identify repeated callers would be served by Twilio, and at that point we've already gotten charged. May look into it more later.
 
-# Points of potential failure, both massive and tiny
+After I got the number working, I began testing the full app flow and realized that Picovoice had nerfed my keyword detection model, probably because I violated their terms by making two accounts. I reimplemented the keyword detection in Vosk, and we were good to go. 
+
+Finally, I was unhappy with my giant if-else work flow. `run_session.py` was around 350 lines of code - not good. I did some research for how I could better organize my code and came across the concept of a finite state machine. I was able to accomplish this pretty quickly, breaking down my if-else flow into 7 states. I think this will really help me down the line if I want to implement testing or for adding new states. More over, my code is much more compact and organized. Each state is now in it's own python file. This increases readability and clarity, both for me, and for an LLM. With the finite state machine implemented, I was in a pretty good shape to move on to tackling some of the more logistical aspects of this project.
+
+## Day 6
+
+The main app flow logic is done, so now we're on to less "plug n' chug" operations (calculus I anyone?).
+
+I learned how to use my USB to TTL serial cable. This will allow me to access the Pi via USB rather than through a local wifi network, which is crucial because the on-site payphone installation will not have wifi. 
+
+I did some research about querying power level from my battery and found it was not possible 😔 But I set up a status checking script that check things like temperature, how much voltage the CPU is pulling, the uptime, and just generally, the fact that it logs something verifies that it's still on and running. 
+
+I organized a list of audio recordings that Laila needs to send me to streamline her process. Again, my job as a collaborator is to make her life easier. I also made a list of things to go over with Laila in the meeting tomorrow. Namely, how are we going to get this big lithium battery to LA, when I'll have access to the payphone for installation, and when she thinks she can get these recordings done by. 
+
+In the evening I set up the Pi to run overnight on my friend's roof. Looking back, this wasn't a very good test. I wanted to see how long the Pi could run on just the battery, but with the added benefit of charging via solar once the sun came up in the morning. The battery was at two bars when I left it in the evening. When I came back in the morning it was on 1 bar. It's been charging via solar in the window since then, and it's still on 1 bar, which gives me reason to believe that running perpetually on solar isn't realistic. 
+
+<img src="/images/installation/content/denial-payphone/roof_test.png" style={{ maxWidth: '400px', width: '100%' }}></img>
+
+## Day 7
+
+Today, I gave Laila a remote demo by holding a microphone to the phone's speaker so she could hear the output, and holding my headphones to the phone's microphone, so she could speak into the phone. It was hacky but it worked and she loved it. The billboard art was submitted, and she's talking to PR people. She needs to talk to Mike about potentially letting us use power, since the payphone is going to be placed in front of his shop. After my test last night, I think the solar power is not going to give us perpetual operation unfortunately. So it's either we get power, or someone needs to come charge the battery every two days or so. It would be a shame if someone went to the location and the payphone was dead. 
+
+I gave Laila the spreadsheet of dialogue and she recorded all the parts and sent them over in a few hours. I replaced my demo recording with hers and that's that. 
+
+I also wrote a script to automatically start `orchestrator.py` in a new detached screen session on start up using `systemd`.
+
+## Day 8
+
+Calling this day 8 because I kind of took the weekend off. I was working yesterday but mostly just looking into how to do sentiment analysis, deciding on the FastText average embedding approach (Bag-of-words), and getting the models ready. Additionally, I knew I would need to record and transcribe at the same time so I started passing audio to Vosk for transcription every 200ms or so. However this caused audio frame loss due to processing lag. If transcription didn't happen before the next block in the buffer was ready, it got lost. This was definitely causing a problem, causing the audio to cut out.
+
+The solution was to put transcription on a different thread and pass audio into a queue for Vosk to use. All the audio thread needs to do is put audio in the queue, and it has more than enough time to do that before it needs to handle the next block in the audio buffer. Meanwhile the transcription thread takes audio from the queue and feeds it into Vosk as it becomes available. Voila.
+
+Now when the user is done recording, we immediately have text we can run sentiment analysis on. We essentially tokenize the user's speech, get the mean of all the vectors, and get the cosine similarity to a pre-computed centroid that represents different concepts like "seriousness" or "silliness".  Unfortunately this doesn't capture relationships between words, but it's a fine solution for working within the constraints of a Raspberry Pi with less than 4GB available RAM.
+
+After that I handled some logistics stuff with Laila over text - I'm returning the solar panel. 
+
+Then I started cleaning up the codebase. Moving constants to a separate file, removing un-used code, making things simpler and easier to read. 
+
+## Day >=8
+
+<aside className="text-gray-500 text-sm italic mb-4">
+    I stopped my daily project diary at some point and recorded these notes when I got back from LA, so they may be a bit more jumbled.
+</aside>
 
 
+I'm not sure even where to begin, but I wanted to record my thoughts before they fade away. I remember implementing the finite state machine and implementing sentiment detection sentiment analysis with the idea that we would dial in later.
+ 
+Basically I got the experience in a working state and I packed everything up and I flew to Los Angeles and I immediately met Laila in Echo Park and we immediately hopped in an Uber and went to the salvage shop to pick up the phone chassis. A guy showed us all these machines with flashing lights that he had rewired - they were all these ancient machines. There was one that was like an old computer that was puffing out air. It was like a respirator or something, actually breathing out air. 
+  
+Anyway, then we got a really long Uber to El Monte where Jamie and Natalie live. We go in and basically almost immediately we start working on the payphone because we're all so excited. We start taking it apart right in front of the door inside their house. We get dust everywhere. We really should've been doing it outside, but we were just so excited to figure this thing out. At some point we went to go get Burmese food and I don't remember much else except that Laila recorded the audio files.
+
+In the morning someone made french toast and we were just working all day. Jamin was working on painting the phone and taking it apart and cleaning it. Jamin and Natalie did a lot of work with cleaning the metal parts and the phone really looked gorgeous after they were done with it. At some point we took a break and went to the mall. We were working until late because the next day was install day. At like 2 AM we basically realized that the proximity sensor was not going to work because it was outputting different numbers if it was positioned even slightly differently. (It was pointed out towards the user) My proximity threshold was a hardcoded value so that was a big issue. Luckily we realized that the lever that moves when you put the phone on the hook was moving a component on the inside of the phone, and that we could use the proximity sensor on the inside of the phone. Because it uses infrared rather than visible light, being on the inside of the payphone wouldn't be an issue. I'm super proud of us for encountering a project-breaking problem at literally the 11th hour and finding a robust solution that worked better than the initial mechanism. 
+
+
+<figure className="max-w-xl w-full py-2 m-0">
+    <img
+        src="/images/installation/content/denial-payphone/eleventh_hour.JPG"
+        className="w-full"
+        alt="Fixing a problem at the last minute"
+    />
+    <figcaption className="text-center text-gray-500 text-xs mt-0">
+        Fixing a catastrophic problem at 2AM the night before install day. 
+    </figcaption>
+</figure>
+
+The next day we wrapped up the payphone in a moving blanket and took off for Echo Park. The install went as smoothly as can be expected for one that involves drilling into concrete in broad daylight. We got the power cord all set up and nicely taped down so that Michael would be happy and basically immediately people started using the payphone.

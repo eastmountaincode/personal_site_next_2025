@@ -8,7 +8,7 @@ export const webProjects = [
         date: "2025",
         crunch: 1,
         cutoff: 0.3,
-        isDetails: true,
+        isDetails: false,
         slug: "doom-meeting",
     },
     {
@@ -20,7 +20,7 @@ export const webProjects = [
         date: "2025",
         crunch: 1,
         cutoff: 0.65,
-        isDetails: true,
+        isDetails: false,
         slug: "diorama-web-game",
         liveLink: "https://www.lailasmith.com/"
     },
