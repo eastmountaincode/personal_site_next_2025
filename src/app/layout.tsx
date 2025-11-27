@@ -59,6 +59,9 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <link rel="manifest" href="/site.webmanifest" />
+      </head>
       <body className="antialiased">
         <Provider>
           <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
