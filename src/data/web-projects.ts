@@ -1,5 +1,18 @@
 export const webProjects = [
     {
+        id: 9,
+        title: "Desire Path Radio",
+        description: "A full-stack solution for an internet radio station, featuring a custom-built CMS and live chat.",
+        image: "/images/web/dpr_image.png",
+        tags: ["Next.js", "TypeScript", "Supabase", "Cloudflare R2"],
+        date: "2025",
+        crunch: 1,
+        cutoff: 0.5,
+        isDetails: false,
+        slug: "desire-path-radio",
+        liveLink: "https://www.desirepathradio.com/"
+    },
+    {
         id: 1,
         title: "Doom Meeting",
         description: "A web based live video feed app integrated into a live performance. Prompted by the performer, users access the site via a QR code, which allows them to project their video feed onto a projected display page.",
@@ -82,7 +95,7 @@ export const webProjects = [
         crunch: 1,
         cutoff: 0.7,
         isDetails: false,
-        liveLink: "https://freewaterhouse.com/library/lending_library.php"
+        liveLink: "https://pvfll-001.andrew-boylan.com/"
     },
     {
         id: 7,
@@ -93,7 +106,6 @@ export const webProjects = [
         date: "2023",
         crunch: 1,
         cutoff: 0.3,
-        isDetails: false,
-        liveLink: "https://freewaterhouse.com/collage/"
+        isDetails: false
     }
 ];
