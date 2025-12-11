@@ -34,7 +34,7 @@ export default function Home() {
               </div>
               <div className="border-l-4 border-gray-300 pl-4">
                 <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">Currently playing:</div>
-                <div className="text-gray-900">Nothing :( ... maybe Hades 2 next?</div>
+                <div className="text-gray-900">Gorogoa</div>
               </div>
               <div className="border-l-4 border-gray-300 pl-4">
                 <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">My books are:</div>

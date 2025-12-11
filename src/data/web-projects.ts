@@ -21,7 +21,7 @@ export const webProjects = [
         date: "2025",
         crunch: 1,
         cutoff: 0.3,
-        isDetails: false,
+        isDetails: true,
         slug: "doom-meeting",
     },
     {
@@ -88,13 +88,14 @@ export const webProjects = [
     {
         id: 6,
         title: "Virtual Free Little Library",
-        description: "A file-sharing site to recreate the experience of a free little library, on the web.",
+        description: "A free little library, but for files.",
         image: "/images/web/free_little_library_header.png",
         tags: ["HTML", "CSS", "JavaScript"],
         date: "2023",
         crunch: 1,
         cutoff: 0.7,
-        isDetails: false,
+        isDetails: true,
+        slug: "virtual-free-little-library",
         liveLink: "https://pvfll-001.andrew-boylan.com/"
     },
     {
