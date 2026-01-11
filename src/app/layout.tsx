@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Provider } from 'jotai';
+import { Analytics } from "@vercel/analytics/next";
 import CrunchSlider from '@/components/CrunchSlider';
 import "./globals.css"
 
@@ -130,6 +131,7 @@ export default function RootLayout({
             </main>
           </div>
         </Provider>
+        <Analytics />
       </body>
     </html>
   );
