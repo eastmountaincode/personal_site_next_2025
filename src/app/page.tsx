@@ -26,7 +26,7 @@ export default function Home() {
             <div className="space-y-4">
               <div className="border-l-4 border-gray-300 pl-4">
                 <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">Based in:</div>
-                <div className="text-gray-900">Boston (Brooklyn soon)</div>
+                <div className="text-gray-900">Brooklyn</div>
               </div>
               <div className="border-l-4 border-gray-300 pl-4">
                 <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">Most Recent Project:</div>
@@ -34,7 +34,7 @@ export default function Home() {
               </div>
               <div className="border-l-4 border-gray-300 pl-4">
                 <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">Currently playing:</div>
-                <div className="text-gray-900">Gorogoa</div>
+                <div className="text-gray-900">Keep Driving</div>
               </div>
               <div className="border-l-4 border-gray-300 pl-4">
                 <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">My books are:</div>
