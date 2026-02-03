@@ -1,5 +1,18 @@
 export const webProjects = [
     {
+        id: 10,
+        title: "Data Analytics for Critical Thinkers",
+        description: "A statistics textbook for a Bard professor featuring reading time analytics, search, and user authentication.",
+        image: "/images/web/dafct-card.png",
+        tags: ["Next.js", "TypeScript", "Supabase", "Clerk"],
+        date: "2026",
+        crunch: 1,
+        cutoff: 0.5,
+        isDetails: true,
+        slug: "dafct",
+        liveLink: "https://analytics.thephilomath.org/"
+    },
+    {
         id: 9,
         title: "Desire Path Radio",
         description: "A full-stack solution for an internet radio station, featuring a custom-built CMS and live chat.",
@@ -47,7 +60,7 @@ export const webProjects = [
         crunch: 1,
         cutoff: 0.8,
         isDetails: false,
-        liveLink: "https://youtubesequencer.com/"
+        liveLink: "https://youtubesequencer.andrew-boylan.com/"
     },
     {
         id: 8,
