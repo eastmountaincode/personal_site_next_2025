@@ -53,8 +53,10 @@ export default function Home() {
                 <FaInstagram className="w-6 h-6" />
               </a>
               
-              <a 
+              <a
                 href="mailto:andreweboylan@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-600 hover:text-gray-900"
               >
                 <MdEmail className="w-6 h-6" />
