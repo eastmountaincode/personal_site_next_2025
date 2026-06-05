@@ -34,12 +34,12 @@ export default function Home() {
               </div>
               <div className="border-l-4 border-gray-300 pl-4">
                 <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">Currently playing:</div>
-                <div className="text-gray-900">Keep Driving</div>
+                <div className="text-gray-900">Silent Hill 2 (remake)</div>
               </div>
-              <div className="border-l-4 border-gray-300 pl-4">
+              {/* <div className="border-l-4 border-gray-300 pl-4">
                 <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">My books are:</div>
                 <div className="text-gray-900">Open - let&apos;s work!</div>
-              </div>
+              </div> */}
             </div>
             
             {/* Social Links */}
