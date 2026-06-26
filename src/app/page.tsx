@@ -19,7 +19,7 @@ export default function Home() {
           {/* Bio Text */}
           <div className="flex-1">
             <p className="lg:text-4xl text-3xl text-gray-900 mb-6">
-              Creating interactive experiences in the browser and beyond.
+            Building spaces <br></br> for play <br></br>in the browser,<br></br> in public,<br></br> and elsewhere. 
             </p>
             
             {/* Info Details */}
