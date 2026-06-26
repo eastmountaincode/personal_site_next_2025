@@ -48,7 +48,7 @@ export const webProjects = [
         cutoff: 0.65,
         isDetails: false,
         slug: "diorama-web-game",
-        liveLink: "https://www.lailasmith.com/"
+        liveLink: "https://www.diorama.lailasmith.com/"
     },
     {
         id: 3,
@@ -72,12 +72,12 @@ export const webProjects = [
         crunch: 1,
         cutoff: 0.63,
         isDetails: false,
-        liveLink: "https://sandwich-alignment.vercel.app/about"
+        liveLink: "https://sandwich.andrew-boylan.com/game"
     },
     {
         id: 4,
         title: "Gridworld Streaming",
-        description: "A responsive music streaming platform built for an independent artist, exploring new models of direct-to-artist financial support.",
+        description: "A music streaming platform, exploring new models of direct-to-artist financial support.",
         image: "/images/web/gridworld_streaming_header.png",
         tags: ["React", "MongoDB", "Firebase", "Stripe", "JWT"],
         date: "2024",
