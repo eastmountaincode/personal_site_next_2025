@@ -1,4 +1,5 @@
 import type { MDXComponents } from 'mdx/types'
+import HtmlpgDeviceMap from '@/components/HtmlpgDeviceMap'
  
 const components: MDXComponents = {
     h1: (props) => <h1 className="text-3xl font-extrabold my-8" {...props} />,
@@ -14,7 +15,8 @@ const components: MDXComponents = {
             target={props.href?.startsWith('http') ? '_blank' : undefined}
             rel={props.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
         />
-    )
+    ),
+    HtmlpgDeviceMap
 }
  
 export function useMDXComponents(): MDXComponents {

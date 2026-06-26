@@ -1,5 +1,17 @@
 export const installationProjects = [
     {
+        id: 3,
+        title: "HTML Pollinator Garden",
+        description: "HTMLPG is like a Little Free Library but for files instead of books.",
+        image: "/images/installation/htmlpg-card.png",
+        tags: ["Raspberry Pi", "ESP32", "Cloudflare R2"],
+        date: "2023-ongoing",
+        crunch: 1,
+        cutoff: 0.45,
+        isDetails: true,
+        slug: 'htmlpg',
+    },
+    {
         id: 1,
         title: "Denial Payphone",
         description: "An interactive payphone installed in Echo Park, Los Angeles. Features keyword detection and sentiment analysis, powered by a Raspberry Pi. 15 billboards in LA were purchased to direct users to the payphone location.",
@@ -9,8 +21,7 @@ export const installationProjects = [
         crunch: 1,
         cutoff: 0.1,
         isDetails: true,
-        slug: 'denial-payphone',
-        liveLink: "https://denial-archive.vercel.app/"
+        slug: 'denial-payphone'
     },
     {
         id: 2,

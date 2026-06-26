@@ -6,13 +6,22 @@ import { usePathname } from "next/navigation";
 import { Provider } from 'jotai';
 import { Analytics } from "@vercel/analytics/next";
 import CrunchSlider from '@/components/CrunchSlider';
+import "leaflet/dist/leaflet.css";
 import "./globals.css"
 
 const navigation = [
   { name: "Web", href: "/web" },
+  { name: "Browser instruments", href: "/browser-instruments", level: 1 },
   { name: "Installation", href: "/installation" },
   { name: "Bioinformatics", href: "/bioinformatics" },
 ];
+
+const crunchSliderRoutes = new Set([
+  "/web",
+  "/browser-instruments",
+  "/installation",
+  "/bioinformatics",
+]);
 
 export default function RootLayout({
   children,
@@ -98,12 +107,14 @@ export default function RootLayout({
                 <nav className={`${isMobileMenuOpen ? 'block' : 'hidden'
                   } md:block`}>
                   {navigation.map((item) => {
-                    const isActive = pathname === item.href;
+                    const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+                    const isNested = item.level === 1;
                     return (
                       <Link
                         key={item.name}
                         href={item.href}
-                        className={`block py-2 ${isActive
+                        aria-current={isActive ? "page" : undefined}
+                        className={`block py-2 ${isNested ? 'pl-6' : ''} ${isActive
                             ? 'font-bold'
                             : 'hover:underline'
                           }`}
@@ -117,7 +128,7 @@ export default function RootLayout({
               </div>
 
               {/* Crunch Slider - bottom of sidebar */}
-              {(pathname === '/installation' || pathname === '/web' || pathname === '/bioinformatics') && (
+              {crunchSliderRoutes.has(pathname) && (
                 <div className="md:p-4">
                   <CrunchSlider />
                 </div>

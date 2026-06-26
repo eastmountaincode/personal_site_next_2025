@@ -51,18 +51,6 @@ export const webProjects = [
         liveLink: "https://www.diorama.lailasmith.com/"
     },
     {
-        id: 3,
-        title: "YouTube Sequencer",
-        description: "A full-stack web app that re-purposes YouTube into a drum sequencer, allowing users to compose, share, and remix rhythm patterns.",
-        image: "/images/web/yts_header.png",
-        tags: ["React", "TypeScript", "AWS EC2", "GraphQL", "PostgreSQL", "Terraform"],
-        date: "2025",
-        crunch: 1,
-        cutoff: 0.8,
-        isDetails: false,
-        liveLink: "https://youtubesequencer.andrew-boylan.com/"
-    },
-    {
         id: 8,
         title: "Sandwich Alignment Game",
         description: "Not just a game about putting sandwiches on an alignment grid - it's a tool for introspection.",
@@ -120,6 +108,7 @@ export const webProjects = [
         date: "2023",
         crunch: 1,
         cutoff: 0.3,
-        isDetails: false
+        isDetails: false,
+        liveLink: "https://collage.andrew-boylan.com/"
     }
 ];
