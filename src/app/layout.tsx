@@ -14,6 +14,7 @@ const navigation = [
   { name: "Browser instruments", href: "/browser-instruments", level: 1 },
   { name: "Installation", href: "/installation" },
   { name: "Bioinformatics", href: "/bioinformatics" },
+  { name: "About", href: "/about", separated: true },
 ];
 
 const crunchSliderRoutes = new Set([
@@ -114,7 +115,7 @@ export default function RootLayout({
                         key={item.name}
                         href={item.href}
                         aria-current={isActive ? "page" : undefined}
-                        className={`block py-2 ${isNested ? 'pl-6' : ''} ${isActive
+                        className={`block py-2 ${item.separated ? 'mt-6' : ''} ${isNested ? 'pl-6' : ''} ${isActive
                             ? 'font-bold'
                             : 'hover:underline'
                           }`}

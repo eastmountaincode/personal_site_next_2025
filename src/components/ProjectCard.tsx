@@ -13,6 +13,7 @@ interface ProjectCardProps {
   crunch?: number;
   isDetails?: boolean;
   liveLink?: string;
+  status?: string;
 }
 
 export default function ProjectCard({
@@ -26,7 +27,8 @@ export default function ProjectCard({
   cutoff,
   crunch,
   isDetails,
-  liveLink
+  liveLink,
+  status
 }: ProjectCardProps) {
   const crunchOverride = useAtomValue(crunchOverrideAtom);
   const effectiveCrunch = crunchOverride ?? crunch;
@@ -43,11 +45,18 @@ export default function ProjectCard({
         clipPath: 'polygon(19px 0, calc(100% - 19px) 0, 100% 19px, 100% calc(100% - 19px), calc(100% - 19px) 100%, 19px 100%, 0 calc(100% - 19px), 0 19px)'
       }}>
       {/* Card Header */}
-      <div className="flex justify-between items-start mb-4">
-        <h3 className="text-xl font-semibold text-gray-900">
-          {title}
-        </h3>
-        <span className="text-sm text-gray-500 ml-4 flex-shrink-0">
+      <div className="flex justify-between items-start gap-4 mb-4">
+        <div className="min-w-0">
+          <h3 className="text-xl font-semibold text-gray-900">
+            {title}
+          </h3>
+          {status && (
+            <span className="mt-2 inline-block origin-left -rotate-2 border border-black bg-gray-100 px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-gray-800 select-none">
+              {status}
+            </span>
+          )}
+        </div>
+        <span className="text-sm text-gray-500 flex-shrink-0">
           {date}
         </span>
       </div>

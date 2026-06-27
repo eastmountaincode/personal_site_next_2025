@@ -48,7 +48,7 @@ export const webProjects = [
         cutoff: 0.65,
         isDetails: false,
         slug: "diorama-web-game",
-        liveLink: "https://www.diorama.lailasmith.com/"
+        liveLink: "https://diorama.lailasmith.com/"
     },
     {
         id: 8,

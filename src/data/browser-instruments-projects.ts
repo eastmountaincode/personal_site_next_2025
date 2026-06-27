@@ -11,6 +11,7 @@ export const browserInstrumentProjects = [
         isDetails: false,
         slug: "cicada",
         liveLink: "https://cicada.andrew-boylan.com/",
+        status: "In progress",
     },
     {
         id: 11,

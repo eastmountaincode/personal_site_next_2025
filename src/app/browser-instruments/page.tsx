@@ -28,6 +28,7 @@ export default function BrowserInstrumentsPage() {
             cutoff={project.cutoff}
             isDetails={project.isDetails}
             liveLink={project.liveLink}
+            status={project.status}
             onViewDetails={() => {
               if (project.slug) {
                 window.location.href = `/web/${project.slug}`;
