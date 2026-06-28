@@ -30,7 +30,7 @@ export default function CrunchSlider() {
           <button
             onClick={handleDecrement}
             disabled={currentValue <= 1}
-            className="w-6 h-6 flex items-center justify-center text-gray-600 hover:text-black disabled:text-gray-300"
+            className="w-6 h-6 flex items-center justify-center text-gray-600 hover:text-black disabled:text-gray-200"
           >
             −
           </button>
@@ -38,7 +38,7 @@ export default function CrunchSlider() {
           <button
             onClick={handleIncrement}
             disabled={currentValue >= 3}
-            className="w-6 h-6 flex items-center justify-center text-gray-600 hover:text-black disabled:text-gray-300"
+            className="w-6 h-6 flex items-center justify-center text-gray-600 hover:text-black disabled:text-gray-200"
           >
             +
           </button>

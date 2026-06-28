@@ -1,10 +1,10 @@
 "use client";
 
 import ProjectCard from "@/components/ProjectCard";
-import { webProjects } from "@/data/web-projects";
+import { webOverviewProjects } from "@/data/web-overview-projects";
 
 export default function WebPage() {
-  const projects = webProjects;
+  const projects = webOverviewProjects;
 
   return (
     <div className="p-6 md:p-8">
@@ -27,6 +27,7 @@ export default function WebPage() {
             cutoff={project.cutoff}
             isDetails={project.isDetails}
             liveLink={project.liveLink}
+            status={project.status}
             onViewDetails={() => {
                 if (project.slug) {
                     window.location.href = `/web/${project.slug}`;

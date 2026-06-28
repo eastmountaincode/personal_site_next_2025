@@ -1,5 +1,6 @@
 import { useAtomValue } from 'jotai';
 import { crunchOverrideAtom } from '@/state/atoms';
+import ArrowGlyph from '@/components/ArrowGlyph';
 
 interface ProjectCardProps {
   title: string;
@@ -51,12 +52,12 @@ export default function ProjectCard({
             {title}
           </h3>
           {status && (
-            <span className="mt-2 inline-block origin-left -rotate-2 border border-black bg-gray-100 px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-gray-800 select-none">
+            <span className="mt-2 inline-block origin-left -rotate-2 border border-black bg-gray-100 px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-gray-900 select-none">
               {status}
             </span>
           )}
         </div>
-        <span className="text-sm text-gray-500 flex-shrink-0">
+        <span className="text-sm text-gray-600 flex-shrink-0">
           {date}
         </span>
       </div>
@@ -86,7 +87,7 @@ export default function ProjectCard({
         {tags.map((tag, index) => (
           <span
             key={index}
-            className="border border-1 border-black px-2 py-1 bg-gray-200 text-gray-700 text-xs rounded-full select-none"
+            className="border border-1 border-black px-2 py-1 bg-gray-200 text-gray-600 text-xs rounded-full select-none"
           >
             {tag}
           </span>
@@ -100,17 +101,19 @@ export default function ProjectCard({
             href={liveLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-black hover:underline text-sm font-medium"
+            className="group text-black text-sm font-medium"
           >
-            Live Link ↗
+            <span className="group-hover:underline">Live Link</span>
+            <ArrowGlyph intent="external" className="ml-1" />
           </a>
         )}
         {isDetails && onViewDetails && (
           <button
             onClick={onViewDetails}
-            className="text-black hover:underline text-sm font-medium cursor-pointer"
+            className="group text-black text-sm font-medium cursor-pointer"
           >
-            More Details →
+            <span className="group-hover:underline">More Details</span>
+            <ArrowGlyph intent="details" className="ml-1" />
           </button>
         )}
       </div>

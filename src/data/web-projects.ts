@@ -13,6 +13,19 @@ export const webProjects = [
         liveLink: "https://analytics.thephilomath.org/"
     },
     {
+        id: 13,
+        title: "Paper Planet",
+        description: "A website streaming globally synced longform animated videos and music, created for an independent record label.",
+        image: "/images/web/paper-planet-people.webp",
+        tags: ["Next.js", "Web Audio API", "Cloudflare R2"],
+        date: "2026",
+        crunch: 1,
+        cutoff: 0.5,
+        isDetails: false,
+        liveLink: "https://www.paper-planet.com/",
+        status: "In progress",
+    },
+    {
         id: 9,
         title: "Desire Path Radio",
         description: "A full-stack solution for an internet radio station, featuring a custom-built CMS and live chat.",

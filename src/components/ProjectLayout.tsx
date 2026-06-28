@@ -2,6 +2,7 @@
 
 import { useAtomValue } from 'jotai';
 import { crunchOverrideAtom } from '@/state/atoms';
+import ArrowGlyph from '@/components/ArrowGlyph';
 
 interface ProjectLayoutProps {
   // Project metadata
@@ -42,9 +43,10 @@ export default function ProjectLayout({
       <div className="mb-8">
         <a
           href={backUrl}
-          className="text-black hover:underline text-sm font-medium"
+          className="group text-black text-sm font-medium"
         >
-          ← {backText}
+          <ArrowGlyph intent="back" className="mr-1" />
+          <span className="group-hover:underline">{backText}</span>
         </a>
       </div>
 
@@ -55,7 +57,7 @@ export default function ProjectLayout({
           <h1 className="text-3xl font-bold text-gray-900">
             {title}
           </h1>
-          <span className="text-sm text-gray-500 ml-4 flex-shrink-0">
+          <span className="text-sm text-gray-600 ml-4 flex-shrink-0">
             {date}
           </span>
         </div>
@@ -82,7 +84,7 @@ export default function ProjectLayout({
             {tags.map((tag, index) => (
               <span
                 key={index}
-                className="px-3 py-1 bg-gray-200 text-gray-700 text-sm rounded-full"
+                className="px-3 py-1 bg-gray-200 text-gray-600 text-sm rounded-full"
               >
                 {tag}
               </span>
@@ -95,9 +97,10 @@ export default function ProjectLayout({
               href={liveLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-black hover:underline text-sm font-medium flex-shrink-0"
+              className="group text-black text-sm font-medium flex-shrink-0"
             >
-              Live Link ↗
+              <span className="group-hover:underline">Live Link</span>
+              <ArrowGlyph intent="external" className="ml-1" />
             </a>
           )}
         </div>

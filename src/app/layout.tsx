@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Provider } from 'jotai';
 import { Analytics } from "@vercel/analytics/next";
+import ArrowGlyph from '@/components/ArrowGlyph';
 import CrunchSlider from '@/components/CrunchSlider';
 import "leaflet/dist/leaflet.css";
 import "./globals.css"
@@ -14,6 +15,8 @@ const navigation = [
   { name: "Browser instruments", href: "/browser-instruments", level: 1 },
   { name: "Installation", href: "/installation" },
   { name: "Bioinformatics", href: "/bioinformatics" },
+  { name: "Analysis", href: "/bioinformatics/analysis", level: 1 },
+  { name: "Software", href: "/bioinformatics/software", level: 1 },
   { name: "About", href: "/about", separated: true },
 ];
 
@@ -22,6 +25,8 @@ const crunchSliderRoutes = new Set([
   "/browser-instruments",
   "/installation",
   "/bioinformatics",
+  "/bioinformatics/analysis",
+  "/bioinformatics/software",
 ]);
 
 export default function RootLayout({
@@ -32,6 +37,9 @@ export default function RootLayout({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const pathname = usePathname();
+  const activeHref = navigation
+    .filter((item) => pathname === item.href || pathname.startsWith(`${item.href}/`))
+    .sort((a, b) => b.href.length - a.href.length)[0]?.href;
 
   useEffect(() => {
     setIsClient(true);
@@ -108,20 +116,23 @@ export default function RootLayout({
                 <nav className={`${isMobileMenuOpen ? 'block' : 'hidden'
                   } md:block`}>
                   {navigation.map((item) => {
-                    const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+                    const isActive = activeHref === item.href;
                     const isNested = item.level === 1;
                     return (
                       <Link
                         key={item.name}
                         href={item.href}
                         aria-current={isActive ? "page" : undefined}
-                        className={`block py-2 ${item.separated ? 'mt-6' : ''} ${isNested ? 'pl-6' : ''} ${isActive
+                        className={`group block py-2 ${item.separated ? 'mt-6' : ''} ${isNested ? 'pl-4' : ''} ${isActive
                             ? 'font-bold'
-                            : 'hover:underline'
+                            : ''
                           }`}
                         onClick={() => setIsMobileMenuOpen(false)} // Close menu when link is clicked
                       >
-                        {item.name}
+                        {isNested && (
+                          <ArrowGlyph intent="subset" className="mr-1.5" />
+                        )}
+                        <span className={isActive ? "" : "group-hover:underline"}>{item.name}</span>
                       </Link>
                     );
                   })}

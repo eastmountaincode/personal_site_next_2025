@@ -24,20 +24,20 @@ export default function Home() {
 
                         {/* Info Details */}
                         <div className="space-y-4">
-                            <div className="border-l-4 border-gray-300 pl-4">
-                                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">Based in:</div>
+                            <div className="border-l-4 border-gray-200 pl-4">
+                                <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">Based in:</div>
                                 <div className="text-gray-900">Brooklyn</div>
                             </div>
-                            <div className="border-l-4 border-gray-300 pl-4">
-                                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">Most Recent Project:</div>
+                            <div className="border-l-4 border-gray-200 pl-4">
+                                <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">Most Recent Project:</div>
                                 <div className="text-gray-900">An <a href="https://desirepathradio.com" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-800">internet radio station</a> for outdoor education and music.</div>
                             </div>
-                            <div className="border-l-4 border-gray-300 pl-4">
-                                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">Currently playing:</div>
+                            <div className="border-l-4 border-gray-200 pl-4">
+                                <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">Currently playing:</div>
                                 <div className="text-gray-900">Silent Hill 2 (remake)</div>
                             </div>
-                            {/* <div className="border-l-4 border-gray-300 pl-4">
-                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">My books are:</div>
+                            {/* <div className="border-l-4 border-gray-200 pl-4">
+                <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">My books are:</div>
                 <div className="text-gray-900">Open - let&apos;s work!</div>
               </div> */}
                         </div>
