@@ -1,4 +1,12 @@
 import ArrowGlyph from "@/components/ArrowGlyph";
+import {
+  PROJECT_GRID_COLUMNS,
+  PROJECT_GRID_DEFAULT_MIN_CARD_WIDTH,
+  PROJECT_GRID_LONG_DESCRIPTION_LENGTH,
+  PROJECT_GRID_LONG_DESCRIPTION_MAX_WIDTH,
+  PROJECT_GRID_LONG_DESCRIPTION_MIN_CARD_WIDTH,
+  PROJECT_GRID_SINGLE_CARD_MAX_WIDTH,
+} from "@/components/ProjectGrid";
 import { ARROWS, type ArrowIntent } from "@/lib/arrows";
 
 const arrowRows: Array<{
@@ -125,6 +133,51 @@ const hoverRows = [
   },
 ];
 
+const typographyRows = [
+  {
+    token: "text-4xl",
+    size: "2.25rem / 36px",
+    usage: "Desktop sidebar wordmark.",
+    weight: "font-bold",
+  },
+  {
+    token: "text-3xl",
+    size: "1.875rem / 30px",
+    usage: "Mobile route titles, project detail titles, and Design System title.",
+    weight: "font-bold",
+  },
+  {
+    token: "text-2xl",
+    size: "1.5rem / 24px",
+    usage: "Secondary feature headings such as HTMLPG map headings.",
+    weight: "font-bold",
+  },
+  {
+    token: "text-xl",
+    size: "1.25rem / 20px",
+    usage: "Project card titles and Design System section headings.",
+    weight: "font-semibold for cards; font-bold for section headings.",
+  },
+  {
+    token: "base",
+    size: "1rem / 16px",
+    usage: "Body copy, project descriptions, sidebar navigation, and default table text.",
+    weight: "regular unless active or explicitly emphasized.",
+  },
+  {
+    token: "text-sm",
+    size: "0.875rem / 14px",
+    usage: "Dates, action links, metadata labels, detail-page tags, Crunch controls, and table headers.",
+    weight: "regular or font-medium for actions/labels.",
+  },
+  {
+    token: "text-xs",
+    size: "0.75rem / 12px",
+    usage: "Project card tags and status stamps.",
+    weight: "regular for tags; font-medium uppercase for stamps.",
+  },
+];
+
 const inactiveColorRows = [
   {
     token: "gray-50",
@@ -161,6 +214,29 @@ const inactiveColorRows = [
     value: "#0000ff",
     swatch: "#0000ff",
     source: "Defined in .prose h1 but no active prose usage found.",
+  },
+];
+
+const layoutRows = [
+  {
+    element: "Project grid",
+    rule: `Columns use ${PROJECT_GRID_COLUMNS}.`,
+    reason: `Default project grids use a ${PROJECT_GRID_DEFAULT_MIN_CARD_WIDTH} minimum. Rows keep equal-height cards.`,
+  },
+  {
+    element: "Long-description grid",
+    rule: `If any project description is at least ${PROJECT_GRID_LONG_DESCRIPTION_LENGTH} characters, the grid minimum becomes ${PROJECT_GRID_LONG_DESCRIPTION_MIN_CARD_WIDTH} and the grid max-width becomes ${PROJECT_GRID_LONG_DESCRIPTION_MAX_WIDTH}.`,
+    reason: "Long-form project cards keep the same typography, can still reach two columns, and do not expand into a cramped three-column layout.",
+  },
+  {
+    element: "Single-card grid",
+    rule: `At md and wider, one-card grids max out at ${PROJECT_GRID_SINGLE_CARD_MAX_WIDTH}. Below md, they fill the available width.`,
+    reason: "A lone desktop card should not stretch across the content area, but mobile column views should not inherit desktop whitespace.",
+  },
+  {
+    element: "Desktop sidebar",
+    rule: "At md and wider, the sidebar is 16rem wide and does not shrink.",
+    reason: "Project grids and long card content should never compress the navigation column.",
   },
 ];
 
@@ -249,6 +325,36 @@ export default function DesignSystemPage() {
       </section>
 
       <section className="mt-10">
+        <h2 className="text-xl font-bold text-gray-900 mb-4">Typography</h2>
+        <div className="border border-black">
+          <div className="grid grid-cols-1 md:grid-cols-[7rem_9rem_1fr_1fr] border-b border-black text-sm font-bold">
+            <div className="p-3 md:border-r md:border-black">Token</div>
+            <div className="hidden md:block p-3 border-r border-black">Size</div>
+            <div className="hidden md:block p-3 border-r border-black">Use</div>
+            <div className="hidden md:block p-3">Weight</div>
+          </div>
+
+          {typographyRows.map((row) => (
+            <div
+              key={row.token}
+              className="grid grid-cols-1 md:grid-cols-[7rem_9rem_1fr_1fr] border-b border-black last:border-b-0"
+            >
+              <div className="p-3 md:border-r md:border-black font-bold md:font-normal">
+                {row.token}
+              </div>
+              <div className="p-3 md:border-r md:border-black text-gray-600">
+                {row.size}
+              </div>
+              <div className="p-3 md:border-r md:border-black text-gray-600">
+                {row.usage}
+              </div>
+              <div className="p-3 text-gray-600">{row.weight}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-10">
         <h2 className="text-xl font-bold text-gray-900 mb-4">Hover And State Rules</h2>
         <div className="border border-black">
           <div className="grid grid-cols-1 md:grid-cols-[10rem_1fr_1fr] border-b border-black text-sm font-bold">
@@ -269,6 +375,32 @@ export default function DesignSystemPage() {
                 {row.rest}
               </div>
               <div className="p-3 text-gray-600">{row.hover}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="text-xl font-bold text-gray-900 mb-4">Layout Rules</h2>
+        <div className="border border-black">
+          <div className="grid grid-cols-1 md:grid-cols-[10rem_1fr_1fr] border-b border-black text-sm font-bold">
+            <div className="p-3 md:border-r md:border-black">Element</div>
+            <div className="hidden md:block p-3 border-r border-black">Rule</div>
+            <div className="hidden md:block p-3">Reason</div>
+          </div>
+
+          {layoutRows.map((row) => (
+            <div
+              key={row.element}
+              className="grid grid-cols-1 md:grid-cols-[10rem_1fr_1fr] border-b border-black last:border-b-0"
+            >
+              <div className="p-3 md:border-r md:border-black font-bold md:font-normal">
+                {row.element}
+              </div>
+              <div className="p-3 md:border-r md:border-black text-gray-600 break-words">
+                {row.rule}
+              </div>
+              <div className="p-3 text-gray-600">{row.reason}</div>
             </div>
           ))}
         </div>

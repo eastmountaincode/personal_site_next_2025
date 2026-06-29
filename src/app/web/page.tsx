@@ -1,10 +1,16 @@
 "use client";
 
 import ProjectCard from "@/components/ProjectCard";
+import ProjectGrid, {
+  getProjectGridMaxWidth,
+  getProjectGridMinCardWidth,
+} from "@/components/ProjectGrid";
 import { webOverviewProjects } from "@/data/web-overview-projects";
 
 export default function WebPage() {
   const projects = webOverviewProjects;
+  const maxWidth = getProjectGridMaxWidth(projects);
+  const minCardWidth = getProjectGridMinCardWidth(projects);
 
   return (
     <div className="p-6 md:p-8">
@@ -14,12 +20,13 @@ export default function WebPage() {
       </div>
 
       {/* Projects Grid */}
-      <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))' }}>
+      <ProjectGrid maxWidth={maxWidth} minCardWidth={minCardWidth}>
         {projects.map((project) => (
           <ProjectCard
             key={project.id}
             title={project.title}
             description={project.description}
+            featuredLinks={project.featuredLinks}
             image={project.image}
             tags={project.tags}
             date={project.date}
@@ -35,7 +42,7 @@ export default function WebPage() {
             }}
           />
         ))}
-      </div>
+      </ProjectGrid>
     </div>
   );
 } 

@@ -85,7 +85,7 @@ export default function RootLayout({
         <Provider>
           <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
             {/* Sidebar */}
-            <aside className={`w-full md:w-64 text-black border-b border-black md:border-b-0 ${isClient ? 'md:h-screen md:sticky md:top-0 md:overflow-y-auto' : ''}`}>
+            <aside className={`w-full md:w-64 md:shrink-0 text-black border-b border-black md:border-b-0 ${isClient ? 'md:h-screen md:sticky md:top-0 md:overflow-y-auto' : ''}`}>
               <div className="p-4 md:pb-4">
                 {/* Header with Logo and Hamburger */}
                 <div className={`flex justify-between items-center ${isMobileMenuOpen ? 'mb-6' : 'mb-0'} md:mb-6`}>
@@ -149,7 +149,7 @@ export default function RootLayout({
 
             {/* Main content */}
             {/* flex-1 means it takes up all the space it can */}
-            <main className="flex-1">
+            <main className="min-w-0 flex-1">
               {children}
             </main>
           </div>

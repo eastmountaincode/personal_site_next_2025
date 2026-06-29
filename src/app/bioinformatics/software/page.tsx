@@ -1,10 +1,16 @@
 "use client";
 
 import ProjectCard from "@/components/ProjectCard";
+import ProjectGrid, {
+    getProjectGridMaxWidth,
+    getProjectGridMinCardWidth,
+} from "@/components/ProjectGrid";
 import { bioinformaticsSoftware } from "@/data/bioinformatics-software";
 
 export default function BioinformaticsSoftwarePage() {
     const projects = bioinformaticsSoftware;
+    const maxWidth = getProjectGridMaxWidth(projects);
+    const minCardWidth = getProjectGridMinCardWidth(projects);
 
     return (
         <div className="p-6 md:p-8">
@@ -12,7 +18,7 @@ export default function BioinformaticsSoftwarePage() {
                 <h1 className="text-3xl font-bold text-gray-900 mb-4">Software</h1>
             </div>
 
-            <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))' }}>
+            <ProjectGrid maxWidth={maxWidth} minCardWidth={minCardWidth}>
                 {projects.map((project) => (
                     <ProjectCard
                         key={project.id}
@@ -28,7 +34,7 @@ export default function BioinformaticsSoftwarePage() {
                         status={project.status}
                     />
                 ))}
-            </div>
+            </ProjectGrid>
         </div>
     );
 }

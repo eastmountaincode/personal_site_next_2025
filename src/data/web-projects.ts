@@ -13,6 +13,18 @@ export const webProjects = [
         liveLink: "https://analytics.thephilomath.org/"
     },
     {
+        id: 14,
+        title: "Knight Stained Glass",
+        description: "A single-page website for a stained glass studio.",
+        image: "/images/web/knight-stained-glass-card.webp",
+        tags: ["Next.js", "TypeScript", "Sanity", "Tailwind"],
+        date: "2026",
+        crunch: 1,
+        cutoff: 0.5,
+        isDetails: false,
+        liveLink: "https://www.knightstainedglass.com/"
+    },
+    {
         id: 13,
         title: "Paper Planet",
         description: "A website streaming globally synced longform animated videos and music, created for an independent record label.",
@@ -67,6 +79,16 @@ export const webProjects = [
         id: 8,
         title: "Sandwich Alignment Game",
         description: "Not just a game about putting sandwiches on an alignment grid - it's a tool for introspection.",
+        featuredLinks: [
+            {
+                label: "The New York Times",
+                href: "https://www.nytimes.com/2026/03/25/briefing/the-good-list-march-madness-desert-flowers.html",
+            },
+            {
+                label: "The Verge",
+                href: "https://www.theverge.com/entertainment/859925/sandwich-alignment-game",
+            },
+        ],
         image: "/images/web/sandwich_game_header.png",
         tags: ["React", "Tailwind", "MongoDB", "OpenAI API"],
         date: "2025",

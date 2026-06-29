@@ -5,6 +5,10 @@ import ArrowGlyph from '@/components/ArrowGlyph';
 interface ProjectCardProps {
   title: string;
   description: string;
+  featuredLinks?: {
+    label: string;
+    href: string;
+  }[];
   image?: string;
   tags: string[];
   date: string;
@@ -20,6 +24,7 @@ interface ProjectCardProps {
 export default function ProjectCard({
   title,
   description,
+  featuredLinks,
   image,
   tags,
   date,
@@ -33,6 +38,7 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   const crunchOverride = useAtomValue(crunchOverrideAtom);
   const effectiveCrunch = crunchOverride ?? crunch;
+
   return (
     <div
       className={`${className}`}
@@ -80,6 +86,25 @@ export default function ProjectCard({
       {/* Description */}
       <p className="text-gray-600 mb-4">
         {description}
+        {featuredLinks && featuredLinks.length > 0 && (
+          <>
+            {" Featured in "}
+            {featuredLinks.map((link, index) => (
+              <span key={link.href}>
+                {index > 0 && (index === featuredLinks.length - 1 ? " and " : ", ")}
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline"
+                >
+                  {link.label}
+                </a>
+              </span>
+            ))}
+            .
+          </>
+        )}
       </p>
 
       {/* Tags */}

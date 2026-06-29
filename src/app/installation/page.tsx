@@ -1,10 +1,16 @@
 "use client";
 
 import ProjectCard from "@/components/ProjectCard";
+import ProjectGrid, {
+    getProjectGridMaxWidth,
+    getProjectGridMinCardWidth,
+} from "@/components/ProjectGrid";
 import { installationOverviewProjects } from "@/data/installation-overview-projects";
 
 export default function InstallationPage() {
     const projects = installationOverviewProjects;
+    const maxWidth = getProjectGridMaxWidth(projects);
+    const minCardWidth = getProjectGridMinCardWidth(projects);
 
     return (
         <div className="p-6 md:p-8">
@@ -14,7 +20,7 @@ export default function InstallationPage() {
             </div>
 
             {/* Projects Grid */}
-            <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))' }}>
+            <ProjectGrid maxWidth={maxWidth} minCardWidth={minCardWidth}>
                 {projects.map((project) => (
                     <ProjectCard
                         key={project.id}
@@ -34,7 +40,7 @@ export default function InstallationPage() {
                         }}
                     />
                 ))}
-            </div>
+            </ProjectGrid>
         </div>
     );
 } 

@@ -10,6 +10,10 @@ type WebOverviewProject =
     liveLink?: string;
     slug?: string;
     status?: string;
+    featuredLinks?: {
+      label: string;
+      href: string;
+    }[];
   };
 
 export const webOverviewProjects = pickProjectsByTitle<WebOverviewProject>(
@@ -18,6 +22,7 @@ export const webOverviewProjects = pickProjectsByTitle<WebOverviewProject>(
     "Paper Planet",
     "Sharkbite",
     "Cicada",
+    "Knight Stained Glass",
     "Data Analytics for Critical Thinkers",
     "Desire Path Radio",
     "Doom Meeting",
