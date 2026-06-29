@@ -4,7 +4,7 @@ export const bioinformaticsSoftware = [
         title: "Novo",
         description: "An full-stack electronic lab notebook solution, featuring search, tags, role-based access, image annotation, commenting, and more.",
         image: "/images/bioinformatics/novo-eln-card.webp",
-        tags: ["Next.js", "SQLite"],
+        tags: ["Next.js", "TypeScript", "SQLite", "Docker"],
         date: "2026",
         crunch: 1,
         cutoff: 0.7,

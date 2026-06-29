@@ -3,7 +3,6 @@ import {
   PROJECT_GRID_COLUMNS,
   PROJECT_GRID_DEFAULT_MIN_CARD_WIDTH,
   PROJECT_GRID_LONG_DESCRIPTION_LENGTH,
-  PROJECT_GRID_LONG_DESCRIPTION_MAX_WIDTH,
   PROJECT_GRID_LONG_DESCRIPTION_MIN_CARD_WIDTH,
   PROJECT_GRID_SINGLE_CARD_MAX_WIDTH,
 } from "@/components/ProjectGrid";
@@ -225,8 +224,8 @@ const layoutRows = [
   },
   {
     element: "Long-description grid",
-    rule: `If any project description is at least ${PROJECT_GRID_LONG_DESCRIPTION_LENGTH} characters, the grid minimum becomes ${PROJECT_GRID_LONG_DESCRIPTION_MIN_CARD_WIDTH} and the grid max-width becomes ${PROJECT_GRID_LONG_DESCRIPTION_MAX_WIDTH}.`,
-    reason: "Long-form project cards keep the same typography, can still reach two columns, and do not expand into a cramped three-column layout.",
+    rule: `If any project description is at least ${PROJECT_GRID_LONG_DESCRIPTION_LENGTH} characters, the grid minimum becomes ${PROJECT_GRID_LONG_DESCRIPTION_MIN_CARD_WIDTH}. The grid still fills the available content width.`,
+    reason: "Long-form project cards keep the same typography and resist cramped columns without leaving unused desktop space.",
   },
   {
     element: "Single-card grid",

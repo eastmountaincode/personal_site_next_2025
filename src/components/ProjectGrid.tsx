@@ -2,7 +2,6 @@ import { Children, type CSSProperties, type ReactNode } from "react";
 
 export const PROJECT_GRID_DEFAULT_MIN_CARD_WIDTH = "320px";
 export const PROJECT_GRID_LONG_DESCRIPTION_MIN_CARD_WIDTH = "400px";
-export const PROJECT_GRID_LONG_DESCRIPTION_MAX_WIDTH = "1000px";
 export const PROJECT_GRID_LONG_DESCRIPTION_LENGTH = 260;
 
 export function getProjectGridColumns(
@@ -21,14 +20,6 @@ export function getProjectGridMinCardWidth<T extends { description: string }>(
   return hasLongProjectDescription(projects)
     ? PROJECT_GRID_LONG_DESCRIPTION_MIN_CARD_WIDTH
     : PROJECT_GRID_DEFAULT_MIN_CARD_WIDTH;
-}
-
-export function getProjectGridMaxWidth<T extends { description: string }>(
-  projects: readonly T[],
-): string | undefined {
-  return hasLongProjectDescription(projects)
-    ? PROJECT_GRID_LONG_DESCRIPTION_MAX_WIDTH
-    : undefined;
 }
 
 function hasLongProjectDescription<T extends { description: string }>(

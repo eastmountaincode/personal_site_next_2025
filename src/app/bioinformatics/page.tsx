@@ -2,14 +2,12 @@
 
 import ProjectCard from "@/components/ProjectCard";
 import ProjectGrid, {
-    getProjectGridMaxWidth,
     getProjectGridMinCardWidth,
 } from "@/components/ProjectGrid";
 import { bioinformaticsOverviewProjects } from "@/data/bioinformatics-overview-projects";
 
 export default function BioinformaticsPage() {
     const projects = bioinformaticsOverviewProjects;
-    const maxWidth = getProjectGridMaxWidth(projects);
     const minCardWidth = getProjectGridMinCardWidth(projects);
 
     return (
@@ -20,7 +18,7 @@ export default function BioinformaticsPage() {
             </div>
 
             {/* Projects Grid */}
-            <ProjectGrid maxWidth={maxWidth} minCardWidth={minCardWidth}>
+            <ProjectGrid minCardWidth={minCardWidth}>
                 {projects.map((project) => (
                     <ProjectCard
                         key={`${project.title}-${project.date}`}

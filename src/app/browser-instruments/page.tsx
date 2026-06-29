@@ -2,14 +2,12 @@
 
 import ProjectCard from "@/components/ProjectCard";
 import ProjectGrid, {
-  getProjectGridMaxWidth,
   getProjectGridMinCardWidth,
 } from "@/components/ProjectGrid";
 import { browserInstrumentProjects } from "@/data/browser-instruments-projects";
 
 export default function BrowserInstrumentsPage() {
   const projects = browserInstrumentProjects;
-  const maxWidth = getProjectGridMaxWidth(projects);
   const minCardWidth = getProjectGridMinCardWidth(projects);
 
   return (
@@ -18,7 +16,7 @@ export default function BrowserInstrumentsPage() {
         <h1 className="text-3xl font-bold text-gray-900 mb-4">Browser instruments</h1>
       </div>
 
-      <ProjectGrid maxWidth={maxWidth} minCardWidth={minCardWidth}>
+      <ProjectGrid minCardWidth={minCardWidth}>
         {projects.map((project) => (
           <ProjectCard
             key={project.id}

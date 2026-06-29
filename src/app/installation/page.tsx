@@ -2,14 +2,12 @@
 
 import ProjectCard from "@/components/ProjectCard";
 import ProjectGrid, {
-    getProjectGridMaxWidth,
     getProjectGridMinCardWidth,
 } from "@/components/ProjectGrid";
 import { installationOverviewProjects } from "@/data/installation-overview-projects";
 
 export default function InstallationPage() {
     const projects = installationOverviewProjects;
-    const maxWidth = getProjectGridMaxWidth(projects);
     const minCardWidth = getProjectGridMinCardWidth(projects);
 
     return (
@@ -20,7 +18,7 @@ export default function InstallationPage() {
             </div>
 
             {/* Projects Grid */}
-            <ProjectGrid maxWidth={maxWidth} minCardWidth={minCardWidth}>
+            <ProjectGrid minCardWidth={minCardWidth}>
                 {projects.map((project) => (
                     <ProjectCard
                         key={project.id}

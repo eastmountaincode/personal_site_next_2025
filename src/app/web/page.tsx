@@ -2,14 +2,12 @@
 
 import ProjectCard from "@/components/ProjectCard";
 import ProjectGrid, {
-  getProjectGridMaxWidth,
   getProjectGridMinCardWidth,
 } from "@/components/ProjectGrid";
 import { webOverviewProjects } from "@/data/web-overview-projects";
 
 export default function WebPage() {
   const projects = webOverviewProjects;
-  const maxWidth = getProjectGridMaxWidth(projects);
   const minCardWidth = getProjectGridMinCardWidth(projects);
 
   return (
@@ -20,7 +18,7 @@ export default function WebPage() {
       </div>
 
       {/* Projects Grid */}
-      <ProjectGrid maxWidth={maxWidth} minCardWidth={minCardWidth}>
+      <ProjectGrid minCardWidth={minCardWidth}>
         {projects.map((project) => (
           <ProjectCard
             key={project.id}
